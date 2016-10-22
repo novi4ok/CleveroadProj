@@ -1,0 +1,82 @@
+﻿
+<div class="dvContentCtnr">
+
+  <div class="dvButtonsCtnr dvTopCtrn">
+    <input type="button" ng-click="goBack()" value="Back to list" />
+  </div>
+
+  <span class="spTitle">"{{taskCopy.name}}" task</span>
+
+  <div ng-show="errorMessage" class="dvErrorMessage">
+    <span>{{errorMessage}}</span>
+  </div>
+
+  <div class="dvTableCtnr">
+    <table>
+      <tbody>
+        <tr>
+          <th>Property</th>
+          <th>Value</th>
+        </tr>
+        <tr>
+          <td>ID</td>
+          <td>{{task.id}}</td>
+        </tr>
+        <tr>
+          <td>Name</td>
+          <td>
+            <edit-property on-click="updateChanges()" value="taskCopy.name" isreset="isResetChanges"></edit-property>
+          </td>
+        </tr>
+        <tr>
+          <td>Description</td>
+          <td>{{task.description}}</td>
+        </tr>
+        <tr>
+          <td>Creation date:</td>
+          <td>{{task.creation_date | date:'medium'}}</td>
+        </tr>
+        <tr>
+          <td>Start date:</td>
+          <td>{{task.start_date | date:'medium'}}</td>
+        </tr>
+        <tr>
+          <td>Due date:</td>
+          <td>{{task.due_date | date:'medium'}}</td>
+        </tr>
+        <tr>
+          <td>Is completed:</td>
+          <td>{{task.is_completed}}</td>
+        </tr>
+        <tr>
+          <td>Is archived:</td>
+          <td>{{task.is_archived}}</td>
+        </tr>
+        <tr>
+          <td>Estimated effort:</td>
+          <td>{{task.estimated_effort | number: 1}}</td>
+        </tr>
+        <tr>
+          <td>Actual effort:</td>
+          <td>{{task.actual_effort | timeValue }}</td>
+        </tr>
+        <tr>
+          <td>Physical progress:</td>
+          <td>{{task.physical_progress}}</td>
+        </tr>
+        <tr>
+          <td>Project id:</td>
+          <td>{{task.project_id}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="dvButtonsCtnr">
+      <input type="submit" ng-disabled="!isDataChanged" ng-click="saveChanges()" value="Save"/>
+      <input type="button" ng-click="resetChanges()" value="Reset" />
+    </div>
+
+  </div>
+
+</div>
+

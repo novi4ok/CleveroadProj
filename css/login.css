@@ -1,0 +1,57 @@
+﻿#loginContainer {
+  position: absolute;
+  top: 25%;
+  width: 100%;
+}
+#loginContainer #loginForm {
+  background-color: #e8e7e7;
+  display: table;
+  margin: auto;
+  padding: 25px 60px;
+  width: 300px;
+}
+#loginContainer #loginForm #titleArea {
+  text-align: center;
+  font-size: 22px;
+  color: #424242;
+  margin-bottom: 20px;
+}
+#loginContainer #loginForm .dvErrorMessage {
+  margin: 10px 0px;
+  color: #ff0000;
+}
+#loginContainer #loginForm .dvField {
+  position: relative;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+#loginContainer #loginForm .dvField img {
+  position: absolute;
+  left: 3px;
+  top: 7px;
+}
+#loginContainer #loginForm .dvField input {
+  padding: 7px 10px 7px 23px;
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid #b7b1b1;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#loginContainer #loginForm .dvField input[type='submit'] {
+  padding: 7px 0px;
+  background-color: #77b7f7;
+  color: #ffffff;
+  font-size: 16px;
+}
+#loginContainer #loginForm .dvField.dvRemember {
+  font-size: 12px;
+  text-align: left;
+}
+#loginContainer #loginForm .dvField.dvRemember input[type='checkbox'] {
+  width: auto;
+  position: relative;
+  top: 2px;
+}
+/*# sourceMappingURL=login.css.map */

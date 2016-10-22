@@ -1,0 +1,43 @@
+﻿
+<div id="loginContainer" class="ng-scope" >
+  <div id="loginForm">
+    <form name="form" novalidate>
+      <div id="titleArea">
+        <span>Testing Project</span><br>
+        <span>(admin@gmail.com/admin)</span>
+      </div>
+      <div class="dvErrorMessage" ng-show="(errorMessage != '')">
+        <span ng-bind="errorMessage"></span>
+      </div>
+      <div class="dvField">
+        <img src="images/userEmail16.png">
+        <input type="email" ng-model="userEmail" name="UserEmailInput" placeholder="E-mail address" required>
+        <div class="dvErrorMessage" ng-show="isNoValid && form.UserEmailInput.$error.required">
+          <span>Required field!</span>
+        </div>
+        <div class="dvErrorMessage" ng-show="isNoValid && form.UserEmailInput.$error.email">
+          <span>Invalid email!</span>
+        </div>
+      </div>
+
+      <div class="dvField">
+        <img src="images/userPassword16.png">
+        <input ng-model="userPassword" name="UserPassword" type="password" placeholder="Password" required>
+        <div class="dvErrorMessage" ng-show="isNoValid && form.UserPassword.$error.required">
+          <span>Required field!</span>
+        </div>
+      </div>
+      <div class="dvField">
+        <input id="btnLogin" ng-click="clickLogin(form)" type="submit" value="login">
+      </div>
+      <div class="dvField dvRemember">
+        <label class="check" >
+          <input id="rememberMe" ng-model="rememberMe" type="checkbox" name="RememberMe">Remember me
+        </label>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

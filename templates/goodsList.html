@@ -1,0 +1,21 @@
+﻿<user-info value="userInfo"></user-info>
+
+<div class="dvContentCtnr">
+  <div class="dvTableCtnr">
+    <table>
+      <tr>
+        <th>№</th>
+        <th>Name</th>
+        <th>Price</th>
+      </tr>
+
+      <tr ng-repeat="goods in goodsList" ng-click="rowClick($event)">
+        <td>{{goods.id}}</td>
+        <td>{{goods.name}}</td>
+        <td>{{goods.price | priceFilter }}</td>
+      </tr>
+    </table>
+  </div>
+
+</div>
+

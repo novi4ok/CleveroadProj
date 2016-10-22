@@ -1,0 +1,113 @@
+﻿html,
+body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  color: #000000;
+}
+#mainContainer {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  font-family: Arial, sans-serif;
+}
+.dvContentCtnr {
+  padding-top: 20px;
+  padding-left: 20px;
+}
+.dvContentCtnr .spTitle {
+  font-size: 21px;
+  font-weight: bold;
+}
+.dvContentCtnr .dvErrorMessage {
+  margin-top: 10px;
+  color: #ff0000;
+}
+.dvContentCtnr .dvEditProperty .dvView {
+  cursor: pointer;
+}
+.dvContentCtnr .dvEditProperty .dvView img {
+  margin-left: 1px;
+  position: relative;
+  top: 1px;
+}
+.dvContentCtnr .dvEditProperty .dvChange input {
+  width: 100%;
+}
+.dvContentCtnr .dvEditProperty .dvChange input.ng-invalid {
+  background-color: #fd7b80;
+  border: 1px solid #c37171;
+}
+.dvContentCtnr .dvEditProperty .dvChange .spRequired {
+  color: #ff0000;
+}
+.dvContentCtnr .dvTableCtnr {
+  margin-top: 15px;
+}
+.dvContentCtnr .dvTableCtnr table {
+  font-size: 15px;
+  border-collapse: separate;
+  border-spacing: 0px;
+}
+.dvContentCtnr .dvTableCtnr table tr th,
+.dvContentCtnr .dvTableCtnr table tr td {
+  border: 1px solid #7b7b7b;
+  border-right: none;
+  padding: 3px 10px;
+}
+.dvContentCtnr .dvTableCtnr table tr td {
+  border-top: none;
+}
+.dvContentCtnr .dvTableCtnr table tr td a {
+  text-decoration: none;
+  color: #000000;
+}
+.dvContentCtnr .dvTableCtnr table tr th:last-child,
+.dvContentCtnr .dvTableCtnr table tr td:last-child {
+  border-right: 1px solid #7b7b7b;
+}
+.dvContentCtnr .dvTableCtnr table tr td.colName {
+  cursor: pointer;
+}
+.dvContentCtnr .dvTableCtnr table tr:not(:first-child):hover,
+.dvContentCtnr .dvTableCtnr table tr.selected {
+  color: #ffffff;
+  background-color: #6c99bd;
+}
+.dvContentCtnr .dvTableCtnr table tr:not(:first-child):hover a,
+.dvContentCtnr .dvTableCtnr table tr.selected a {
+  color: #ffffff;
+}
+.dvContentCtnr .dvTableCtnr table tr:not(:first-child):hover .dvEditProperty .dvChange .spRequired,
+.dvContentCtnr .dvTableCtnr table tr.selected .dvEditProperty .dvChange .spRequired {
+  color: #ffed01;
+}
+.dvContentCtnr .dvTableCtnr table tr.highPriority {
+  color: #ffffff;
+  background-color: red;
+}
+.dvContentCtnr .dvTableCtnr table tr.highPriority a {
+  color: #ffffff;
+}
+.dvContentCtnr .dvTableCtnr table tr.highPriority:hover,
+.dvContentCtnr .dvTableCtnr table tr.highPriority.selected {
+  background-color: #06a3ea;
+}
+.dvContentCtnr #hintSection {
+  margin-top: 15px;
+  font-size: 14px;
+}
+.dvContentCtnr .dvButtonsCtnr {
+  margin-top: 10px;
+}
+.dvContentCtnr .dvButtonsCtnr input {
+  padding: 2px 15px;
+  font-size: 14px;
+}
+.dvContentCtnr .dvButtonsCtnr.dvTopCtrn {
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+/*# sourceMappingURL=style.css.map */
