@@ -1,0 +1,9 @@
+﻿.dvContentCtnr .dvPagination .dvItemsPerPage {
+  max-width: 200px;
+}
+.dvContentCtnr .dvPagination .dvItemsPerPage select {
+  display: inline-block;
+  width: 45px;
+  height: 30px;
+  padding: 0px 2px;
+}

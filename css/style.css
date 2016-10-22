@@ -59,10 +59,10 @@ body {
 }
 .dvContentCtnr .dvTableCtnr table tr td {
   border-top: none;
-}
-.dvContentCtnr .dvTableCtnr table tr td a {
-  text-decoration: none;
-  color: #000000;
+  /*a {
+            text-decoration: none;
+            color: @textColor;
+          }*/
 }
 .dvContentCtnr .dvTableCtnr table tr th:last-child,
 .dvContentCtnr .dvTableCtnr table tr td:last-child {
@@ -75,10 +75,9 @@ body {
 .dvContentCtnr .dvTableCtnr table tr.selected {
   color: #ffffff;
   background-color: #6c99bd;
-}
-.dvContentCtnr .dvTableCtnr table tr:not(:first-child):hover a,
-.dvContentCtnr .dvTableCtnr table tr.selected a {
-  color: #ffffff;
+  /*a {
+          color: @colorCell;
+        }*/
 }
 .dvContentCtnr .dvTableCtnr table tr:not(:first-child):hover .dvEditProperty .dvChange .spRequired,
 .dvContentCtnr .dvTableCtnr table tr.selected .dvEditProperty .dvChange .spRequired {
@@ -87,9 +86,9 @@ body {
 .dvContentCtnr .dvTableCtnr table tr.highPriority {
   color: #ffffff;
   background-color: red;
-}
-.dvContentCtnr .dvTableCtnr table tr.highPriority a {
-  color: #ffffff;
+  /*a {
+          color: @colorCell;
+        }*/
 }
 .dvContentCtnr .dvTableCtnr table tr.highPriority:hover,
 .dvContentCtnr .dvTableCtnr table tr.highPriority.selected {
@@ -110,4 +109,3 @@ body {
   margin-top: 0px;
   margin-bottom: 10px;
 }
-/*# sourceMappingURL=style.css.map */

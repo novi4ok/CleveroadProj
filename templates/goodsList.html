@@ -1,18 +1,42 @@
 ﻿<user-info value="userInfo"></user-info>
 
 <div class="dvContentCtnr">
+
+  <div class="dvPagination">
+    <div class="dvItemsPerPage">
+      <span>Items per page:</span>
+      <select ng-model="filterCount" class="form-control" ng-options="opt for opt in filterCountList">
+        <option ng-repeat="x in filterCountList" value="{{x}}">{{x}}</option>
+      </select>
+    </div>
+
+    <pagination ng-model="currentPage"
+                total-items="goodsList.length"
+                max-size="maxSize"
+                boundary-links="true"
+                boundary-link-numbers="true"
+                rotate="false"
+                items-per-page="filterCount">
+    </pagination>
+  </div>
+  
   <div class="dvTableCtnr">
     <table>
       <tr>
         <th>№</th>
         <th>Name</th>
         <th>Price</th>
+        <th></th>
       </tr>
 
-      <tr ng-repeat="goods in goodsList" ng-click="rowClick($event)">
+      <tr ng-repeat="goods in filteredGoodsList" ng-click="rowClick($event)">
         <td>{{goods.id}}</td>
         <td>{{goods.name}}</td>
         <td>{{goods.price | priceFilter }}</td>
+        <td>
+          <a href="" nb-model="goods" ng-click="detailsClick($event, goods)">Details</a>
+          <a href="">Edit</a>
+        </td>
       </tr>
     </table>
   </div>

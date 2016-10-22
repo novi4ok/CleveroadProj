@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "css/style.css",
+    "inputFile": "css/style.less"
+  },
+  {
+    "outputFile": "css/goodsList.css",
+    "inputFile": "css/goodsList.less"
+  },
+  {
+    "outputFile": "css/login.css",
+    "inputFile": "css/login.less"
+  }
+]
