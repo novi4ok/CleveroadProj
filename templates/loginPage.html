@@ -22,9 +22,12 @@
 
       <div class="dvField">
         <img src="images/userPassword16.png">
-        <input ng-model="userPassword" name="UserPassword" type="password" placeholder="Password" required>
+        <input ng-model="userPassword" name="UserPassword" type="password" placeholder="Password" ng-minlength="6" ng-maxlength="16" ng-pattern="[a-zA-Z0-9]+" required>
         <div class="dvErrorMessage" ng-show="isNoValid && form.UserPassword.$error.required">
           <span>Required field!</span>
+        </div>
+        <div class="dvErrorMessage" ng-show="isNoValid && (form.UserPassword.$error.minlength || form.UserPassword.$error.maxlength)">
+          <span>Invalid password! - should have the size from 6 to 16 and contains the symbols [a-zA-Z0-9]</span>
         </div>
       </div>
       <div class="dvField">

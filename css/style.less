@@ -24,11 +24,6 @@ html, body {
     padding-top: 20px;
     padding-left: 20px;
 
-    .dvErrorMessage {
-      margin-top: 10px;
-      color: @textErrorColor;
-    }
-
     .dvEditProperty {
       .dvView {
         cursor: pointer;
@@ -107,6 +102,11 @@ html, body {
     font-size: 21px;
     font-weight: bold;
   }
+
+  .dvErrorMessage {
+      margin-top: 10px;
+      color: @textErrorColor;
+    }
   
   .dvButtonsCtnr {
     margin-top: 10px;
@@ -120,7 +120,7 @@ html, body {
     margin-bottom: 10px;
   }
 
-  .dvEditItemCtnr {
+  .dvEditCtnr {
     table {
       tr:first-child {
         td {
@@ -133,8 +133,23 @@ html, body {
 
       input, textarea {
         min-width: 300px;
+        width: 100%;
       }
       
+      .tdPhone {
+        span {
+          margin-right: 5px;
+        }
+        input {
+          width: auto;
+        }
+      }
+
+
+    }
+
+    .dvErrorMessage {
+      margin-top: 0px;
     }
   }
 

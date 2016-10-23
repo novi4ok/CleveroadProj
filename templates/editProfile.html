@@ -1,0 +1,87 @@
+﻿
+<div class="dvEditCtnr">
+
+  <div class="dvButtonsCtnr dvTopCtrn">
+    <input type="button" ng-click="goBack()" value="Back to list" />
+  </div>
+
+  <span class="spTitle">{{title}}</span>
+
+  <div ng-show="errorMessage" class="dvErrorMessage">
+    <span>{{errorMessage}}</span>
+  </div>
+
+  <div class="dvTableCtnr">
+    <form name="form" novalidate>
+      <table>
+        <tbody>
+          <tr>
+            <td>Name: </td>
+            <td>
+              <input type="text" ng-model="name" maxlength="255" />
+            </td>
+          </tr>
+          <tr>
+            <td>Surname: </td>
+            <td>
+              <input type="text" ng-model="surname" maxlength="255" />
+            </td>
+          </tr>
+          <tr>
+            <td>Email:*</td>
+            <td>
+              <input type="email" ng-model="userEmail" name="UserEmailInput" placeholder="E-mail address" ng-keydown="isNoValid=false" required>
+              <div class="dvErrorMessage" ng-show="isNoValid && form.UserEmailInput.$error.required">
+                <span>Required field!</span>
+              </div>
+              <div class="dvErrorMessage" ng-show="isNoValid && form.UserEmailInput.$error.email">
+                <span>Invalid email!</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Phone: </td>
+            <td class="tdPhone">
+              <span>+380</span><input type="text" name="Phone" ng-model="phone" numeric-only minlength="9" maxlength="9" placeholder="XXХХХХХХХ" />
+              <div class="dvErrorMessage" ng-show="form.Phone.$dirty && isNoValid && (form.Phone.$error.minlength || form.Phone.$error.maxlength)">
+                <span>Phone number should have 9 digits</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+
+
+    <div class="dvButtonsCtnr">
+      <input type="button" ng-click="saveItem(form)" value="Save"/>
+      <input type="button" ng-click="changePassword()" value="Change password"/>
+    </div>
+
+    <div class="dvChangePasswordArea">
+      <div class="dvField">
+        <input ng-model="newPassword" name="NewPassword" type="password" placeholder="New password" ng-minlength="6" ng-maxlength="16" ng-pattern="[a-zA-Z0-9]+" required>
+        <div class="dvErrorMessage" ng-show="isNoValid && form.UserPassword.$error.required">
+          <span>Required field!</span>
+        </div>
+        <div class="dvErrorMessage" ng-show="isNoValid && (form.NewPassword.$error.minlength || form.NewPassword.$error.maxlength)">
+          <span>Invalid password! - should have the size from 6 to 16 and contains the symbols [a-zA-Z0-9]</span>
+        </div>
+      </div>
+
+      <div class="dvField">
+        <input ng-model="repeatPassword" name="RepeatPassword" type="password" placeholder="Repeat password" ng-minlength="6" ng-maxlength="16" ng-pattern="[a-zA-Z0-9]+" required>
+        <div class="dvErrorMessage" ng-show="isNoValid && (form.UserPassword.$error.minlength || form.UserPassword.$error.maxlength)">
+          <span>Invalid password! - should have the size from 6 to 16 and contains the symbols [a-zA-Z0-9]</span>
+        </div>
+      </div>
+
+      <div class="dvButtonsCtnr">
+        <input type="button" ng-click="savePassword(form)" value="Save" />
+      </div>
+    </div>
+
+  </div>
+
+</div>
+

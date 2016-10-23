@@ -18,10 +18,6 @@ body {
   padding-top: 20px;
   padding-left: 20px;
 }
-#mainContainer .dvContentCtnr .dvErrorMessage {
-  margin-top: 10px;
-  color: #ff0000;
-}
 #mainContainer .dvContentCtnr .dvEditProperty .dvView {
   cursor: pointer;
 }
@@ -86,6 +82,10 @@ body {
   font-size: 21px;
   font-weight: bold;
 }
+#mainContainer .dvErrorMessage {
+  margin-top: 10px;
+  color: #ff0000;
+}
 #mainContainer .dvButtonsCtnr {
   margin-top: 10px;
 }
@@ -97,13 +97,24 @@ body {
   margin-top: 0px;
   margin-bottom: 10px;
 }
-#mainContainer .dvEditItemCtnr table tr:first-child td {
+#mainContainer .dvEditCtnr table tr:first-child td {
   border-top: 1px solid #7b7b7b;
 }
-#mainContainer .dvEditItemCtnr table td:first-child {
+#mainContainer .dvEditCtnr table td:first-child {
   font-weight: bold;
 }
-#mainContainer .dvEditItemCtnr table input,
-#mainContainer .dvEditItemCtnr table textarea {
+#mainContainer .dvEditCtnr table input,
+#mainContainer .dvEditCtnr table textarea {
   min-width: 300px;
+  width: 100%;
 }
+#mainContainer .dvEditCtnr table .tdPhone span {
+  margin-right: 5px;
+}
+#mainContainer .dvEditCtnr table .tdPhone input {
+  width: auto;
+}
+#mainContainer .dvEditCtnr .dvErrorMessage {
+  margin-top: 0px;
+}
+/*# sourceMappingURL=style.css.map */

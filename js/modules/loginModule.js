@@ -9,6 +9,11 @@
     $scope.userPassword = (localStorage["testProj_userPassword"] ? localStorage["testProj_userPassword"] : "");
     $scope.rememberMe = !!(localStorage["testProj_rememberMe"]);
 
+    var loginFormElem = angular.element(document.querySelector("#loginForm"));
+    loginFormElem.find("input").bind("keydown", function() {
+      $scope.isNoValid = false;
+    });
+
     $scope.clickLogin = function (form) {
       $scope.isNoValid = !form.$valid;
       if (!form.$valid)

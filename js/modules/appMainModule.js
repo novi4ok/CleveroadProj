@@ -20,6 +20,10 @@
         templateUrl: "templates/editItem.html",
         controller: "editItemController"
       })
+      .when("/editProfile", {
+        templateUrl: "templates/editProfile.html",
+        controller: "editProfileController"
+      })
       .when('/404', {
         templateUrl: 'templates/404.html'
         //controller: 'RedirectCtrl'
@@ -38,6 +42,7 @@
   appMain.controller('appController', [
     '$scope', '$window', 'userProfile', function ($scope, $window, userProfile) {
       if (false && !userProfile.isLoggedIn()) {
+      //if (!userProfile.isLoggedIn()) {
         $window.location.href = '#/login';
       } else {
         userProfile.setUserInfo({ name: 'test', email: 'tefa@mail' });
@@ -47,6 +52,8 @@
         
         //$window.location.href = '#/';
         //$window.location.href = '#/create';
+        $window.location.href = '#/editProfile';
+        //$window.location.href = '#/login';
       }
     }
   ]);
@@ -164,6 +171,59 @@
     };
 
   }]);
+
+  appMain.controller('editProfileController', [
+  '$scope', 'userProfile', function ($scope, userProfile) {
+    $scope.isNoValid = false;
+    $scope.errorMessage = "";
+    $scope.title = "Edit profile";
+    $scope.prefix = "+380";
+
+    var userInfo = userProfile.getUserInfo();
+    $scope.name = userInfo.name;
+    $scope.surname = userInfo.surname;
+    $scope.email = userInfo.email;
+    if (!userInfo.phone)
+      userInfo.phone = "";
+    $scope.phone = userInfo.phone.replace($scope.prefix, "");
+
+    $scope.saveItem = function (form) {
+      $scope.isNoValid = !form.$valid;
+      if (!form.$valid)
+        return;
+
+      userInfo.name = $scope.name;
+      userInfo.surname = $scope.surname;
+      userInfo.email = $scope.email;
+      if ($scope.phone)
+        userInfo.phone = $scope.prefix + $scope.phone;
+    };
+
+    // goBack
+    $scope.goBack = function () {
+      window.history.back();
+    };
+
+  }]);
+
+  appMain.directive('numericOnly', function () {
+    return {
+      require: 'ngModel',
+      link: function (scope, element, attrs, modelCtrl) {
+
+        modelCtrl.$parsers.push(function (inputValue) {
+          var transformedInput = inputValue ? inputValue.replace(/[^\d.-]/g, '') : null;
+
+          if (transformedInput != inputValue) {
+            modelCtrl.$setViewValue(transformedInput);
+            modelCtrl.$render();
+          }
+
+          return transformedInput;
+        });
+      }
+    };
+  });
 
   appMain.filter('priceFilter', function () {
     return function (value) {
