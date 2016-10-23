@@ -19,23 +19,27 @@
                 items-per-page="filterCount">
     </pagination>
   </div>
-  
+
+  <input type="button" value="Delete selected" ng-click="deleteSelected()">
+  <input type="button" value="Create" ng-click="createNew()">
   <div class="dvTableCtnr">
     <table>
       <tr>
+        <th><input type="checkbox" ng-model="isCheckAll" ng-click="checkAll($event)" /></th>
         <th>№</th>
         <th>Name</th>
         <th>Price</th>
         <th></th>
       </tr>
 
-      <tr ng-repeat="goods in filteredGoodsList" ng-click="rowClick($event)">
+      <tr ng-repeat="goods in filteredGoodsList" ng-class="{'selected': goods.checked}">
+        <td><input type="checkbox" ng-model="goods.checked"  /></td>
         <td>{{goods.id}}</td>
         <td>{{goods.name}}</td>
         <td>{{goods.price | priceFilter }}</td>
         <td>
           <a href="" nb-model="goods" ng-click="detailsClick($event, goods)">Details</a>
-          <a href="">Edit</a>
+          <a href="#edit/{{goods.id}}">Edit</a>
         </td>
       </tr>
     </table>

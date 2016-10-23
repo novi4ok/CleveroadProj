@@ -1,6 +1,7 @@
 ﻿
 @textColor: #000000;
 @textErrorColor: #ff0000;
+@borderCell: 1px solid #7b7b7b;
 
 html, body {
   margin: 0px;
@@ -17,117 +18,129 @@ html, body {
   width: 100%;
   position: relative;
   font-family: Arial, sans-serif;
-}
+  padding: 15px 15px;
 
+  .dvContentCtnr {
+    padding-top: 20px;
+    padding-left: 20px;
 
-.dvContentCtnr {
-  padding-top: 20px;
-  padding-left: 20px;
+    .dvErrorMessage {
+      margin-top: 10px;
+      color: @textErrorColor;
+    }
+
+    .dvEditProperty {
+      .dvView {
+        cursor: pointer;
+        img {
+          margin-left: 1px;
+          position: relative;
+          top: 1px;
+        }
+      }
+      .dvChange {
+        input {
+          width: 100%;
+        }
+        input.ng-invalid {
+          background-color: #fd7b80;
+          border: 1px solid #c37171;
+        }
+        .spRequired {
+          color: @textErrorColor;
+        }
+      }
+    }
+
+    #hintSection {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+  }
+
+  .dvTableCtnr {
+      margin-top: 15px;
+    
+      table {
+        font-size: 15px;
+        border-collapse: separate;
+        border-spacing: 0px;
+
+        tr {
+          th, td {
+            border: @borderCell;
+            border-right: none;
+            padding: 3px 10px;          
+          }
+          td {
+            border-top: none;
+
+            /*a {
+              text-decoration: none;
+              color: @textColor;
+            }*/
+          }
+          th:last-child, td:last-child {
+            border-right: @borderCell;
+          }
+          td.colName {
+            cursor: pointer;
+          }
+        } 
+        @colorCell: #ffffff;
+        tr.selected {
+          color: @colorCell;
+          background-color: #6c99bd;
+          a {
+            color: @colorCell;
+          }
+          .dvEditProperty .dvChange .spRequired {
+            color: #ffed01;
+          }
+        }
+
+      }
+    }
 
   .spTitle {
     font-size: 21px;
     font-weight: bold;
   }
   
-  .dvErrorMessage {
-    margin-top: 10px;
-    color: @textErrorColor;
-  }
-
-  .dvEditProperty {
-    .dvView {
-      cursor: pointer;
-      img {
-        margin-left: 1px;
-        position: relative;
-        top: 1px;
-      }
-    }
-    .dvChange {
-      input {
-        width: 100%;
-      }
-      input.ng-invalid {
-        background-color: #fd7b80;
-        border: 1px solid #c37171;
-      }
-      .spRequired {
-        color: @textErrorColor;
-      }
-    }
-  }
-
-  .dvTableCtnr {
-    margin-top: 15px;
-    
-    table {
-      font-size: 15px;
-      border-collapse: separate;
-      border-spacing: 0px;
-
-      tr {
-        @borderCell: 1px solid #7b7b7b;
-        th, td {
-          border: @borderCell;
-          border-right: none;
-          padding: 3px 10px;          
-        }
-        td {
-          border-top: none;
-
-          /*a {
-            text-decoration: none;
-            color: @textColor;
-          }*/
-        }
-        th:last-child, td:last-child {
-          border-right: @borderCell;
-        }
-        td.colName {
-          cursor: pointer;
-        }
-      } 
-      @colorCell: #ffffff;
-      tr:not(:first-child):hover, tr.selected {
-        color: @colorCell;
-        background-color: #6c99bd;
-        /*a {
-          color: @colorCell;
-        }*/
-        .dvEditProperty .dvChange .spRequired {
-          color: #ffed01;
-        }
-      }
-
-      tr.highPriority {
-        color: @colorCell;
-        background-color: red;
-        /*a {
-          color: @colorCell;
-        }*/
-      }
-      tr.highPriority:hover, tr.highPriority.selected {
-        background-color: #06a3ea;
-      }
-    }
-  }
-
-  #hintSection {
-    margin-top: 15px;
-    font-size: 14px;
-  }
-
   .dvButtonsCtnr {
     margin-top: 10px;
     input {
       padding: 2px 15px;
       font-size: 14px;
-    }    
+    }
   }
   .dvButtonsCtnr.dvTopCtrn {
     margin-top: 0px;
     margin-bottom: 10px;
-  }  
+  }
+
+  .dvEditItemCtnr {
+    table {
+      tr:first-child {
+        td {
+          border-top: @borderCell;
+        }
+      }
+      td:first-child {
+        font-weight: bold;
+      }
+
+      input, textarea {
+        min-width: 300px;
+      }
+      
+    }
+  }
+
 
 }
+
+
+
 

@@ -12,100 +12,98 @@ body {
   width: 100%;
   position: relative;
   font-family: Arial, sans-serif;
+  padding: 15px 15px;
 }
-.dvContentCtnr {
+#mainContainer .dvContentCtnr {
   padding-top: 20px;
   padding-left: 20px;
 }
-.dvContentCtnr .spTitle {
-  font-size: 21px;
-  font-weight: bold;
-}
-.dvContentCtnr .dvErrorMessage {
+#mainContainer .dvContentCtnr .dvErrorMessage {
   margin-top: 10px;
   color: #ff0000;
 }
-.dvContentCtnr .dvEditProperty .dvView {
+#mainContainer .dvContentCtnr .dvEditProperty .dvView {
   cursor: pointer;
 }
-.dvContentCtnr .dvEditProperty .dvView img {
+#mainContainer .dvContentCtnr .dvEditProperty .dvView img {
   margin-left: 1px;
   position: relative;
   top: 1px;
 }
-.dvContentCtnr .dvEditProperty .dvChange input {
+#mainContainer .dvContentCtnr .dvEditProperty .dvChange input {
   width: 100%;
 }
-.dvContentCtnr .dvEditProperty .dvChange input.ng-invalid {
+#mainContainer .dvContentCtnr .dvEditProperty .dvChange input.ng-invalid {
   background-color: #fd7b80;
   border: 1px solid #c37171;
 }
-.dvContentCtnr .dvEditProperty .dvChange .spRequired {
+#mainContainer .dvContentCtnr .dvEditProperty .dvChange .spRequired {
   color: #ff0000;
 }
-.dvContentCtnr .dvTableCtnr {
+#mainContainer .dvContentCtnr #hintSection {
+  margin-top: 15px;
+  font-size: 14px;
+}
+#mainContainer .dvTableCtnr {
   margin-top: 15px;
 }
-.dvContentCtnr .dvTableCtnr table {
+#mainContainer .dvTableCtnr table {
   font-size: 15px;
   border-collapse: separate;
   border-spacing: 0px;
 }
-.dvContentCtnr .dvTableCtnr table tr th,
-.dvContentCtnr .dvTableCtnr table tr td {
+#mainContainer .dvTableCtnr table tr th,
+#mainContainer .dvTableCtnr table tr td {
   border: 1px solid #7b7b7b;
   border-right: none;
   padding: 3px 10px;
 }
-.dvContentCtnr .dvTableCtnr table tr td {
+#mainContainer .dvTableCtnr table tr td {
   border-top: none;
   /*a {
-            text-decoration: none;
-            color: @textColor;
-          }*/
+              text-decoration: none;
+              color: @textColor;
+            }*/
 }
-.dvContentCtnr .dvTableCtnr table tr th:last-child,
-.dvContentCtnr .dvTableCtnr table tr td:last-child {
+#mainContainer .dvTableCtnr table tr th:last-child,
+#mainContainer .dvTableCtnr table tr td:last-child {
   border-right: 1px solid #7b7b7b;
 }
-.dvContentCtnr .dvTableCtnr table tr td.colName {
+#mainContainer .dvTableCtnr table tr td.colName {
   cursor: pointer;
 }
-.dvContentCtnr .dvTableCtnr table tr:not(:first-child):hover,
-.dvContentCtnr .dvTableCtnr table tr.selected {
+#mainContainer .dvTableCtnr table tr.selected {
   color: #ffffff;
   background-color: #6c99bd;
-  /*a {
-          color: @colorCell;
-        }*/
 }
-.dvContentCtnr .dvTableCtnr table tr:not(:first-child):hover .dvEditProperty .dvChange .spRequired,
-.dvContentCtnr .dvTableCtnr table tr.selected .dvEditProperty .dvChange .spRequired {
+#mainContainer .dvTableCtnr table tr.selected a {
+  color: #ffffff;
+}
+#mainContainer .dvTableCtnr table tr.selected .dvEditProperty .dvChange .spRequired {
   color: #ffed01;
 }
-.dvContentCtnr .dvTableCtnr table tr.highPriority {
-  color: #ffffff;
-  background-color: red;
-  /*a {
-          color: @colorCell;
-        }*/
+#mainContainer .spTitle {
+  font-size: 21px;
+  font-weight: bold;
 }
-.dvContentCtnr .dvTableCtnr table tr.highPriority:hover,
-.dvContentCtnr .dvTableCtnr table tr.highPriority.selected {
-  background-color: #06a3ea;
-}
-.dvContentCtnr #hintSection {
-  margin-top: 15px;
-  font-size: 14px;
-}
-.dvContentCtnr .dvButtonsCtnr {
+#mainContainer .dvButtonsCtnr {
   margin-top: 10px;
 }
-.dvContentCtnr .dvButtonsCtnr input {
+#mainContainer .dvButtonsCtnr input {
   padding: 2px 15px;
   font-size: 14px;
 }
-.dvContentCtnr .dvButtonsCtnr.dvTopCtrn {
+#mainContainer .dvButtonsCtnr.dvTopCtrn {
   margin-top: 0px;
   margin-bottom: 10px;
+}
+#mainContainer .dvEditItemCtnr table tr:first-child td {
+  border-top: 1px solid #7b7b7b;
+}
+#mainContainer .dvEditItemCtnr table td:first-child {
+  font-weight: bold;
+}
+#mainContainer .dvEditItemCtnr table input,
+#mainContainer .dvEditItemCtnr table textarea {
+  min-width: 300px;
 }

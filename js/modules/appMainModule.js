@@ -12,6 +12,14 @@
         templateUrl: "templates/loginPage.html",
         controller: "loginController"
       })
+      .when("/create", {
+        templateUrl: "templates/editItem.html",
+        controller: "editItemController"
+      })
+      .when("/edit/:itemId", {
+        templateUrl: "templates/editItem.html",
+        controller: "editItemController"
+      })
       .when('/404', {
         templateUrl: 'templates/404.html'
         //controller: 'RedirectCtrl'
@@ -37,7 +45,8 @@
         $scope.userEmail = userProfile.getUserInfo().email;
 
         
-        $window.location.href = '#/';
+        //$window.location.href = '#/';
+        //$window.location.href = '#/create';
       }
     }
   ]);
@@ -45,23 +54,11 @@
 
   // appController
   appMain.controller('goodsListController', [
-    '$scope', '$window', 'userProfile', function ($scope, $window, userProfile) {
+    '$scope', '$window', '$location', 'userProfile', 'goodsList', function ($scope, $window, $location, userProfile, goodsList) {
       $scope.userInfo = userProfile.getUserInfo();
 
-      $scope.makeGoods = function () {
-        $scope.goodsList = [];
-        for (var i = 0; i < 1000; i++) {
-          $scope.goodsList.push(
-          {
-            id: i,
-            name: 'name' + i,
-            price: i * 1000.23,
-            description: 'description' + i
-          });
-        }
-      };
-      $scope.makeGoods();
 
+      $scope.goodsList = goodsList.getList();
       $scope.filterCountList = [10, 20, 50];
       $scope.filterCount = $scope.filterCountList[0];
 
@@ -69,39 +66,104 @@
      , $scope.currentPage = 1
      , $scope.maxSize = 5;
 
-      $scope.numPages2 = function () {
-        return Math.ceil($scope.goodsList.length / parseInt($scope.filterCount));
-      };
-      $scope.numPages = $scope.numPages2();
-
-      $scope.$watch('currentPage + filterCount', function () {
+      var updateList = function() {
         var filterCount = parseInt($scope.filterCount);
         var begin = (($scope.currentPage - 1) * filterCount)
         , end = begin + filterCount;
 
         $scope.filteredGoodsList = $scope.goodsList.slice(begin, end);
-        $scope.numPages = $scope.numPages2();
+        $scope.isCheckAll = false;
+      };
+
+      $scope.$watch('currentPage + filterCount', function () {
+        updateList();
       });
 
-      $scope.detailsClick = function (event, goods) {
-        goods.isShowDetails = !goods.isShowDetails;
+      $scope.lastDetailsGoods = null;
+      $scope.detailsClick = function(event, goods) {
+        goods.isShowDetails = ($scope.lastDetailsGoods !== goods) || !goods.isShowDetails;
+        $scope.lastDetailsGoods = goods;
 
         var detailsElem = angular.element(event.currentTarget);
         var trParentElem = detailsElem.parent().parent();
         var tableParentElem = trParentElem.parent();
-        angular.element(tableParentElem[0].querySelector(".trDetailsArea")).remove();
+        angular.element(tableParentElem[0].querySelectorAll(".trDetailsArea")).remove();
         angular.element(tableParentElem[0].querySelectorAll(".tdDetailsOpen")).text("Details");
         if (goods.isShowDetails) {
           detailsElem.text("Hide");
           detailsElem.addClass("tdDetailsOpen");
-          trParentElem.after("<tr class='trDetailsArea'><td colspan='4'>" + goods.description + "</td></tr>");
-        } else {
-          //angular.element(tableParentElem.querySelector("tdDetailsOpen")).text("Details");
+          trParentElem.after("<tr class='trDetailsArea'><td colspan='5'>" + goods.description + "</td></tr>");
         }
-      }
+      };
+
+      $scope.isCheckAll = false;
+      $scope.checkAll = function(event) {
+        angular.forEach($scope.filteredGoodsList, function(goods) {
+          goods.checked = $scope.isCheckAll;
+        });
+      };
+
+      $scope.deleteSelected = function () {
+        var checkedItems = [];
+        angular.forEach($scope.filteredGoodsList, function (goods) {
+          if (goods.checked) {
+            checkedItems.push(goods);
+          }
+        });
+        angular.forEach(checkedItems, function(item) {
+          var index = $scope.goodsList.indexOf(item);
+          $scope.goodsList.splice(index, 1);
+        });
+        updateList();
+      };
+
+      $scope.createNew = function () {
+        $location.path("/create");
+      };
 
     }
   ]);
+
+  appMain.controller('editItemController', [
+  '$scope', '$routeParams', 'goodsList', function ($scope, $routeParams, goodsList) {
+    $scope.errorMessage = "";
+    if (!$routeParams.itemId) {
+      $scope.title = "Create item";
+      $scope.action = "Create";
+      $scope.name = "";
+      $scope.price = 0;
+      $scope.description = "";
+    } else {
+      $scope.title = "Edit item";
+      $scope.action = "Save";
+      $scope.goodsItem = goodsList.getGoodsById($routeParams.itemId);
+      if ($scope.goodsItem) {
+        $scope.name = $scope.goodsItem.name;
+        $scope.price = $scope.goodsItem.price;
+        $scope.description = $scope.goodsItem.description;
+      } else {
+        $scope.errorMessage = "Items isn't found!";
+      }
+    }
+
+    $scope.saveItem = function () {
+      if ($scope.goodsItem) {
+        $scope.goodsItem.name = $scope.name;
+        $scope.goodsItem.price = $scope.price;
+        $scope.goodsItem.description = $scope.description;
+      } else {
+        goodsList.addItem({ name: $scope.name, price: $scope.price, description: $scope.description });
+      }
+
+      $scope.goBack();
+    };
+
+    // goBack
+    $scope.goBack = function () {
+      window.history.back();
+    };
+
+  }]);
 
   appMain.filter('priceFilter', function () {
     return function (value) {
@@ -112,12 +174,48 @@
   });
 
 
-  appMain.factory('userInfo', function () {
-    var taskCollectionObj = {
+  appMain.factory('goodsList', function () {
+    var goodsList;
+    var goodsListObj = {
+      constructor: function () {
+        goodsList = [];
+        for (var i = 0; i < 1000; i++) {
+          goodsList.push(
+          {
+            id: i,
+            name: 'name' + i,
+            price: i * 1000.23,
+            description: 'description' + i
+          });
+        }
+      },
 
+      getList: function () {
+        return goodsList;
+      },
+
+      getGoodsById: function (id) {
+        if(!id) return null;
+        
+        id = parseInt(id);
+        if(isNaN(id)) return null;
+        
+        var itemFound = null;
+        for (var i = 0; i < goodsList.length; i++) {
+          if (goodsList[i].id === id) {
+            itemFound = goodsList[i];
+            break;
+          }
+        }
+        return itemFound;
+      },
+
+      addItem: function (goods) {
+        goodsList.push(goods);
+      }
     };
-
-    return taskCollectionObj;
+    goodsListObj.constructor();
+    return goodsListObj;
   });
 
 
