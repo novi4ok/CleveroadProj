@@ -175,6 +175,8 @@
   appMain.controller('editProfileController', [
   '$scope', 'userProfile', function ($scope, userProfile) {
     $scope.isNoValid = false;
+    $scope.isNoValidPassword = false;
+    $scope.isChangePasswordShow = false;
     $scope.errorMessage = "";
     $scope.title = "Edit profile";
     $scope.prefix = "+380";
@@ -187,6 +189,12 @@
       userInfo.phone = "";
     $scope.phone = userInfo.phone.replace($scope.prefix, "");
 
+    var editProfileCtnrElem = angular.element(document.querySelector("#editProfileCtnr"));
+    editProfileCtnrElem.find("input").bind("keydown", function () {
+      $scope.isNoValid = false;
+      $scope.isNoValidPassword = false;
+    });
+
     $scope.saveItem = function (form) {
       $scope.isNoValid = !form.$valid;
       if (!form.$valid)
@@ -197,6 +205,14 @@
       userInfo.email = $scope.email;
       if ($scope.phone)
         userInfo.phone = $scope.prefix + $scope.phone;
+    };
+
+    $scope.savePassword = function (form) {
+      $scope.isNoValidPassword = !form.$valid;
+      if (!form.$valid)
+        return;
+
+      userInfo.password = $scope.newPassword;
     };
 
     // goBack

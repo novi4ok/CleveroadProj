@@ -86,6 +86,11 @@ body {
   margin-top: 10px;
   color: #ff0000;
 }
+#mainContainer .dvInfo {
+  font-size: 13px;
+  margin-top: 3px;
+  color: #3a3636;
+}
 #mainContainer .dvButtonsCtnr {
   margin-top: 10px;
 }
@@ -115,6 +120,12 @@ body {
   width: auto;
 }
 #mainContainer .dvEditCtnr .dvErrorMessage {
-  margin-top: 0px;
+  margin-top: 2px;
+}
+#mainContainer .dvEditCtnr .dvChangePasswordArea {
+  margin-top: 10px;
+}
+#mainContainer .dvEditCtnr .dvChangePasswordArea .dvField {
+  margin-top: 10px;
 }
 /*# sourceMappingURL=style.css.map */
