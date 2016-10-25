@@ -20,6 +20,15 @@
 </head>
 <body ng-app="appMain" ng-controller="appController">
 
+  <div id="loadingApp" class="dvLoading">
+    <div class="dvLoadingContent">
+      <div class="dvElem">
+        <img src="./images/loading.gif">
+      </div>
+    </div>
+  </div>
+
+  <user-info ng-show="isUserInfoShow" value="userActive"></user-info>
 
   <div id="mainContainer" ng-view></div>
 

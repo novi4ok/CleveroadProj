@@ -41,29 +41,31 @@
   // appController
   appMain.controller('appController', [
     '$scope', '$window', 'userProfile', function ($scope, $window, userProfile) {
-      if (false && !userProfile.isLoggedIn()) {
-      //if (!userProfile.isLoggedIn()) {
-        $window.location.href = '#/login';
-      } else {
-        userProfile.setUserInfo({ name: 'test', email: 'tefa@mail' });
-        $scope.userName = userProfile.getUserInfo().name;
-        $scope.userEmail = userProfile.getUserInfo().email;
+
+      //if (false && !userProfile.isLoggedIn()) {
+      ////if (!userProfile.isLoggedIn()) {
+      //  $window.location.href = '#/login';
+      //} else {
+      //  userProfile.setUserInfo({ name: 'test', email: 'tefa@mail' });
+      //  $scope.userName = userProfile.getUserInfo().name;
+      //  $scope.userEmail = userProfile.getUserInfo().email;
 
         
-        //$window.location.href = '#/';
-        //$window.location.href = '#/create';
-        $window.location.href = '#/editProfile';
-        //$window.location.href = '#/login';
-      }
+      //  //$window.location.href = '#/';
+      //  //$window.location.href = '#/create';
+      //  $window.location.href = '#/editProfile';
+      //  //$window.location.href = '#/login';
+      //}
+
+      userProfile.pingSession();
     }
   ]);
-
 
   // appController
   appMain.controller('goodsListController', [
     '$scope', '$window', '$location', 'userProfile', 'goodsList', function ($scope, $window, $location, userProfile, goodsList) {
-      $scope.userInfo = userProfile.getUserInfo();
 
+      $scope.title = "List of goods";
 
       $scope.goodsList = goodsList.getList();
       $scope.filterCountList = [10, 20, 50];
@@ -181,13 +183,17 @@
     $scope.title = "Edit profile";
     $scope.prefix = "+380";
 
-    var userInfo = userProfile.getUserInfo();
-    $scope.name = userInfo.name;
-    $scope.surname = userInfo.surname;
-    $scope.email = userInfo.email;
-    if (!userInfo.phone)
-      userInfo.phone = "";
-    $scope.phone = userInfo.phone.replace($scope.prefix, "");
+    var sessionUser = userProfile.getSession();
+    if (!sessionUser || !sessionUser.user)
+      return;
+
+    var user = sessionUser.user;
+    $scope.name = user.name;
+    $scope.surname = user.surname;
+    $scope.email = user.email;
+    if (!user.phone)
+      user.phone = "";
+    $scope.phone = user.phone.replace($scope.prefix, "");
 
     var editProfileCtnrElem = angular.element(document.querySelector("#editProfileCtnr"));
     editProfileCtnrElem.find("input").bind("keydown", function () {
@@ -195,16 +201,20 @@
       $scope.isNoValidPassword = false;
     });
 
-    $scope.saveItem = function (form) {
+    $scope.saveProfile = function (form) {
       $scope.isNoValid = !form.$valid;
       if (!form.$valid)
         return;
 
-      userInfo.name = $scope.name;
-      userInfo.surname = $scope.surname;
-      userInfo.email = $scope.email;
+      user.name = $scope.name;
+      user.surname = $scope.surname;
+      user.email = $scope.email;
       if ($scope.phone)
-        userInfo.phone = $scope.prefix + $scope.phone;
+        user.phone = $scope.prefix + $scope.phone;
+
+      userProfile.saveProfile(user, function() {
+        
+      });
     };
 
     $scope.savePassword = function (form) {
@@ -212,7 +222,7 @@
       if (!form.$valid)
         return;
 
-      userInfo.password = $scope.newPassword;
+      user.password = $scope.newPassword;
     };
 
     // goBack

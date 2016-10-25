@@ -1,7 +1,14 @@
-﻿<user-info value="userInfo"></user-info>
-
+﻿
 <div class="dvContentCtnr">
 
+  <div class="dvTitle">
+    <span class="spTitle">{{title}}</span>
+  </div>
+
+  <div class="dvButtonsCtnr">
+    <input type="button" value="Delete selected" ng-click="deleteSelected()">
+    <input type="button" value="Create new" ng-click="createNew()">    
+  </div>
   <div class="dvPagination">
     <div class="dvItemsPerPage">
       <span>Items per page:</span>
@@ -19,9 +26,6 @@
                 items-per-page="filterCount">
     </pagination>
   </div>
-
-  <input type="button" value="Delete selected" ng-click="deleteSelected()">
-  <input type="button" value="Create" ng-click="createNew()">
   <div class="dvTableCtnr">
     <table>
       <tr>
@@ -33,7 +37,7 @@
       </tr>
 
       <tr ng-repeat="goods in filteredGoodsList" ng-class="{'selected': goods.checked}">
-        <td><input type="checkbox" ng-model="goods.checked"  /></td>
+        <td><input type="checkbox" ng-model="goods.checked" /></td>
         <td>{{goods.id}}</td>
         <td>{{goods.name}}</td>
         <td>{{goods.price | priceFilter }}</td>
@@ -45,5 +49,5 @@
     </table>
   </div>
 
-</div>
+  </div>
 

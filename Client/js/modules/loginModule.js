@@ -3,11 +3,12 @@
   var loginModule = angular.module('loginModule', ['userProfileModule']);
 
   // loginController
-  loginModule.controller('loginController', ['$scope', '$window', 'userProfile', function ($scope, $window, userProfile) {
+  loginModule.controller('loginController', ['$scope', '$window', '$location', 'userProfile', function ($scope, $window, $location, userProfile) {
     $scope.isNoValid = false;
-    $scope.userEmail = (localStorage["testProj_userEmail"] ? localStorage["testProj_userEmail"] : "");
-    $scope.userPassword = (localStorage["testProj_userPassword"] ? localStorage["testProj_userPassword"] : "");
-    $scope.rememberMe = !!(localStorage["testProj_rememberMe"]);
+    $scope.isLoginProcessing = false;
+    $scope.userEmail = ($window.localStorage["testProj_userEmail"] ? $window.localStorage["testProj_userEmail"] : "");
+    $scope.userPassword = ($window.localStorage["testProj_userPassword"] ? $window.localStorage["testProj_userPassword"] : "");
+    $scope.rememberMe = !!($window.localStorage["testProj_rememberMe"]);
 
     var loginFormElem = angular.element(document.querySelector("#loginForm"));
     loginFormElem.find("input").bind("keydown", function() {
@@ -20,18 +21,30 @@
         return;
 
       if ($scope.rememberMe) {
-        localStorage["testProj_userEmail"] = $scope.userEmail;
-        localStorage["testProj_userPassword"] = $scope.userPassword;
-        localStorage["testProj_rememberMe"] = true;
+        $window.localStorage["testProj_userEmail"] = $scope.userEmail;
+        $window.localStorage["testProj_userPassword"] = $scope.userPassword;
+        $window.localStorage["testProj_rememberMe"] = true;
       } else {
-        delete localStorage["testProj_userEmail"];
-        delete localStorage["testProj_userPassword"];
-        delete localStorage["testProj_rememberMe"];
+        delete $window.localStorage["testProj_userEmail"];
+        delete $window.localStorage["testProj_userPassword"];
+        delete $window.localStorage["testProj_rememberMe"];
       }
 
-      userProfile.setUserInfo({ name: 'test', email: $scope.userEmail });
-      $window.location.href = '#/';
-      //$scope.errorMessage = "Incorrect email!";
+      $scope.isLoginProcessing = true;
+
+      var userParams = {
+        email: $scope.userEmail,
+        password: $scope.userPassword
+      };
+      userProfile.login(userParams, function (errorMessage) {
+        $scope.isLoginProcessing = false;
+        if (errorMessage) {
+          $scope.errorMessage = errorMessage;
+        } else {
+          //$window.location.href = '#/';
+          $location.path("/");
+        }
+      });
     };
 
   }]);

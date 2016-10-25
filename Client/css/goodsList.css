@@ -1,4 +1,10 @@
-﻿.dvContentCtnr .dvPagination .dvItemsPerPage {
+﻿.dvContentCtnr .dvPagination {
+  margin-top: 15px;
+}
+.dvContentCtnr .dvPagination ul.pagination {
+  margin: 10px 0px;
+}
+.dvContentCtnr .dvPagination .dvItemsPerPage {
   max-width: 200px;
 }
 .dvContentCtnr .dvPagination .dvItemsPerPage select {
@@ -7,3 +13,4 @@
   height: 30px;
   padding: 0px 2px;
 }
+/*# sourceMappingURL=goodsList.css.map */

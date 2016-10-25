@@ -30,7 +30,7 @@
           <tr>
             <td>Email:*</td>
             <td>
-              <input type="email" ng-model="userEmail" name="UserEmailInput" placeholder="E-mail address" ng-keydown="isNoValid=false" required>
+              <input type="email" ng-model="email" name="UserEmailInput" placeholder="E-mail address" ng-keydown="isNoValid=false" required>
               <div class="dvErrorMessage" ng-show="isNoValid && form.UserEmailInput.$error.required">
                 <span>Required field!</span>
               </div>
@@ -53,7 +53,7 @@
     </form>
 
       <div class="dvButtonsCtnr">
-        <input type="button" ng-click="saveItem(form)" value="Save" />
+        <input type="button" ng-click="saveProfile(form)" value="Save" />
         <input type="button" ng-click="isChangePasswordShow=true" value="Change password" />
       </div>
 

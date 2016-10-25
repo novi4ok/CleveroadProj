@@ -45,6 +45,9 @@
   color: #ffffff;
   font-size: 16px;
 }
+#loginContainer #loginForm .dvField input[type='submit']:disabled {
+  color: #d4d4d4;
+}
 #loginContainer #loginForm .dvField.dvRemember {
   font-size: 12px;
   text-align: left;
@@ -54,3 +57,4 @@
   position: relative;
   top: 2px;
 }
+/*# sourceMappingURL=login.css.map */

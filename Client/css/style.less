@@ -13,16 +13,49 @@ html, body {
   color: @textColor;
 }
 
+.dvLoading {
+  display: block;
+  width: 100%;  
+  height: 100%;
+  .dvLoadingContent {
+    display: table;
+    margin: 0 auto;
+    height: 100%;
+
+    .dvElem {
+      display: table-cell;
+      vertical-align: middle;
+
+      img {
+        width: 48px;
+      }
+    }
+  }
+}
+
+#userInfoCtnr {
+  position: absolute;
+  top: 0px;
+  z-index: 1;
+  width: 100%;
+  padding: 5px 10px;
+  background-color: #d8d6d8;
+  color: #292929;
+  
+  a {
+    margin-left: 5px;
+    text-decoration: underline;
+  }
+}
+
 #mainContainer {
   height: 100%;
   width: 100%;
-  position: relative;
+  position: absolute;
   font-family: Arial, sans-serif;
-  padding: 15px 15px;
+  padding: 40px 15px 0px 15px;
 
   .dvContentCtnr {
-    padding-top: 20px;
-    padding-left: 20px;
 
     .dvEditProperty {
       .dvView {
@@ -55,8 +88,8 @@ html, body {
   }
 
   .dvTableCtnr {
-      margin-top: 15px;
-    
+    padding-bottom: 15px;
+
       table {
         font-size: 15px;
         border-collapse: separate;
@@ -66,7 +99,7 @@ html, body {
           th, td {
             border: @borderCell;
             border-right: none;
-            padding: 3px 10px;          
+            padding: 5px 15px;
           }
           td {
             border-top: none;
@@ -98,9 +131,12 @@ html, body {
       }
     }
 
-  .spTitle {
-    font-size: 21px;
-    font-weight: bold;
+  .dvTitle {
+    margin-bottom: 20px;
+    span {
+      font-size: 21px;
+      font-weight: bold;
+    }
   }
 
   .dvErrorMessage {
@@ -119,6 +155,7 @@ html, body {
     input {
       padding: 2px 15px;
       font-size: 14px;
+      margin-right: 10px;
     }
   }
   .dvButtonsCtnr.dvTopCtrn {
