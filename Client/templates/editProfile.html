@@ -2,7 +2,7 @@
 <div id="editProfileCtnr" class="dvEditCtnr">
 
   <div class="dvButtonsCtnr dvTopCtrn">
-    <input type="button" ng-click="goBack()" value="Back to list" />
+    <input type="button" ng-click="backToList()" value="Back to list" />
   </div>
 
   <div class="dvTitle">
@@ -55,7 +55,7 @@
     </form>
 
       <div class="dvButtonsCtnr">
-        <input type="button" ng-click="saveProfile(form)" value="Save" />
+        <input type="button" ng-click="saveProfile(form)" value="Save" ng-disabled="isRequestProcessing" />
         <input type="button" ng-click="isChangePasswordShow=true" value="Change password" />
       </div>
 
@@ -83,11 +83,10 @@
         </div>
 
         <div class="dvButtonsCtnr">
-          <input type="button" ng-click="changePassword(formPassword)" value="Save" />
+          <input type="button" ng-click="changePassword(formPassword)" value="Save" ng-disabled="isRequestProcessing" />
         </div>
       </div>
     </form>
-    
 
   </div>
 

@@ -141,10 +141,6 @@
         return;
       }
 
-      //var hashedPassword = "";
-      //if (data.user.password && data.user.password != "")
-      //  hashedPassword = passwordHash.generate(data.user.password);
-
       var userFound = _.findWhere(userList, { id: data.user.id });      
       if (userFound) {
         var userExistEmail = _.findWhere(userList, { email: data.user.email });
@@ -172,16 +168,11 @@
           callback();
         return;
       }
-
-      //var hashedPassword = "";
-      //if (data.user.password && data.user.password != "")
-      //  hashedPassword = passwordHash.generate(data.user.password);
-
+      
       var userFound = _.findWhere(userList, { id: data.user.id });
       if (userFound) {
         var user = data.user;
-        userFound.name = user.name;
-        passwordHash.generate('111111'),
+        userFound.password = passwordHash.generate(data.user.newPassword),
         data.user = userFound;
       } else {
         objResponse.error = "User isn't found!";

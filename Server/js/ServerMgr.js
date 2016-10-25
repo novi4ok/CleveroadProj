@@ -136,6 +136,13 @@
                 });
                 break;
               }
+            //case "changePassword":
+            //  {
+            //    userMgr.changePassword(dataRequest, objResponse, function () {
+            //      self.responseCallbackPOST(response, dataRequest, objResponse);
+            //    });
+            //    break;
+            //  }
 
           }
         }

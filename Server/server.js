@@ -1,4 +1,4 @@
-//var http = require('http');
+
 var express = require('express');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
@@ -13,11 +13,6 @@ app.use(cookieParser());
 app.use(session({
   key: 'A_SESSION_KEY',
   secret: 'ssshhhhh',
-  ////store: new express.session.MemoryStore,
-  //cookie: { 
-  //  domain: 'solution-site.com', 
-  //  maxAge   : 1000*60*60*24*30*12 
-  //}  
 }));
 
 try {

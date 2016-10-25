@@ -1,9 +1,8 @@
 ﻿(function (angular) {
   'use strict';
-  var userProfileModule = angular.module('userProfileModule', [])
-  .factory('userProfile', ['$rootScope', '$http', '$window', '$location', function ($rootScope, $http, $window, $location) {
+  var userProfileModule = angular.module('userProfileModule', ['utilsModule'])
+  .factory('userProfile', ['$rootScope', '$window', '$location', 'Utils', function ($rootScope, $window, $location, Utils) {
     var self;
-    var userInfo;
     var prefixStorage = "testingApp_";
 
     var session = {
@@ -16,18 +15,6 @@
       constructor: function() {
         self = this;
       },
-
-      setUserInfo: function (_userInfo) {
-        userInfo = _userInfo;
-      },
-      getUserInfo: function() {
-        return userInfo;
-      },
-      isLoggedIn: function() {
-        return (userInfo && userInfo.email);
-      },
-
-
 
       getSession: function () {
         if (!session || !session.id) {
@@ -62,9 +49,9 @@
           sessionID: (session ? session.id : '')
         };
 
-        self.setLoadingApplication(true);
+        Utils.setLoadingApplication(true);
 
-        self.httpRequest(data, function success(response) {
+        Utils.httpRequest(data, function success(response) {
           if (!response.error) {
             if (response.data && response.data.user && response.data.user.sessionID) {
               var user = response.data.user;
@@ -74,10 +61,10 @@
             $location.path('/login');
           }
 
-          self.setLoadingApplication(false);
+          Utils.setLoadingApplication(false);
         }, function error(response, status) {
           $location.path('/login');
-          self.setLoadingApplication(false);          
+          Utils.setLoadingApplication(false);
         });
 
       },
@@ -92,7 +79,10 @@
           user: userParams,
         };
 
-        self.httpRequest(data, function success(response) {
+        var session = self.getSession();
+        data.sessionID = (session ? session.id : '');
+
+        Utils.httpRequest(data, function success(response) {
           var errorMessage = "";
           if (!response.error) {
             if (response.data && response.data.user && response.data.user.sessionID) {
@@ -128,7 +118,7 @@
           sessionID: (session ? session.id : '')
         };
 
-        self.httpRequest(data, function success(response) {
+        Utils.httpRequest(data, function success(response) {
           $rootScope.isUserInfoShow = false;
           $rootScope.userActive = null;
 
@@ -147,7 +137,7 @@
           user: userParams,
         };
 
-        self.httpRequest(data, function success(response) {
+        Utils.httpRequest(data, function success(response) {
           var errorMessage = "";
           if (!response.error) {
             if (response.data && response.data.user && response.data.user.sessionID) {
@@ -172,17 +162,20 @@
         });
       },
 
-      changeProfile: function (userParams, callback) {
+      changePassword: function (userParams, callback) {
         if (!userParams)
           return;
 
-        var action = "changeProfile";
+        var action = "changePassword";
         var data = {
           action: action,
           user: userParams,
         };
 
-        self.httpRequest(data, function success(response) {
+        var session = self.getSession();
+        data.sessionID = (session ? session.id : '');
+
+        Utils.httpRequest(data, function success(response) {
           var errorMessage = "";
           if (!response.error) {
             if (response.data && response.data.user && response.data.user.sessionID) {
@@ -206,53 +199,7 @@
             callback(errorMessage);
         });
       },
-
-      httpRequest: function (data, success, error) {
-        if (!data || !success)
-          return;
-
-        var session = self.getSession();
-        data.sessionID = (session ? session.id : '');
-
-        //var url = CONST.SERVER.PATH();
-        var url = "http://localhost:80/";
-
-        var req = {
-          method: 'POST',
-          url: url,
-          //url: url,
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            'Accept': "application/json, text/plain, */*",
-          },
-          data: JSON.stringify(data)
-        };
-
-        //if (data.isNotified)
-        //  Utils.showProcessBar(true);
-
-        $http(req).
-          success(function (response, status, headers, config) {
-            if (success)
-              success(response);
-          }).
-          error(function (response, status, headers, config) {
-            if (error)
-              error(response, status);
-          });
-      },
-
-      setLoadingApplication: function (isLoad) {
-        var loadingAppElem = angular.element(document.querySelector("#loadingApp"));
-        var mainContainerElem = angular.element(document.querySelector("#mainContainer"));
-        if (isLoad) {
-          loadingAppElem.css("display", "block");
-          mainContainerElem.css("display", "none");
-        } else {
-          loadingAppElem.css("display", "none");
-          mainContainerElem.css("display", "block");
-        }
-      },
+      
 
     };
 
