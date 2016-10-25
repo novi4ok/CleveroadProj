@@ -104,7 +104,6 @@
             case "login":
               {
                 userMgr.login(dataRequest, objResponse, function () {
-                  //response.end(JSON.stringify(objResponse));
                   self.responseCallbackPOST(response, dataRequest, objResponse);
                 });
                 break;
@@ -112,7 +111,6 @@
             case "logout":
               {
                 userMgr.logout(dataRequest, objResponse, function () {
-                  //response.end(JSON.stringify(objResponse));
                   self.responseCallbackPOST(response, dataRequest, objResponse);
                 });
                 break;
@@ -127,7 +125,13 @@
             case "saveProfile":
               {
                 userMgr.saveProfile(dataRequest, objResponse, function () {
-                  //response.end(JSON.stringify(objResponse));
+                  self.responseCallbackPOST(response, dataRequest, objResponse);
+                });
+                break;
+              }
+            case "changePassword":
+              {
+                userMgr.changePassword(dataRequest, objResponse, function () {
                   self.responseCallbackPOST(response, dataRequest, objResponse);
                 });
                 break;

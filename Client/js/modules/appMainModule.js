@@ -41,22 +41,6 @@
   // appController
   appMain.controller('appController', [
     '$scope', '$window', 'userProfile', function ($scope, $window, userProfile) {
-
-      //if (false && !userProfile.isLoggedIn()) {
-      ////if (!userProfile.isLoggedIn()) {
-      //  $window.location.href = '#/login';
-      //} else {
-      //  userProfile.setUserInfo({ name: 'test', email: 'tefa@mail' });
-      //  $scope.userName = userProfile.getUserInfo().name;
-      //  $scope.userEmail = userProfile.getUserInfo().email;
-
-        
-      //  //$window.location.href = '#/';
-      //  //$window.location.href = '#/create';
-      //  $window.location.href = '#/editProfile';
-      //  //$window.location.href = '#/login';
-      //}
-
       userProfile.pingSession();
     }
   ]);
@@ -64,6 +48,7 @@
   // appController
   appMain.controller('goodsListController', [
     '$scope', '$window', '$location', 'userProfile', 'goodsList', function ($scope, $window, $location, userProfile, goodsList) {
+      userProfile.pingSession();
 
       $scope.title = "List of goods";
 
@@ -135,6 +120,8 @@
 
   appMain.controller('editItemController', [
   '$scope', '$routeParams', 'goodsList', function ($scope, $routeParams, goodsList) {
+    //userProfile.pingSession();
+
     $scope.errorMessage = "";
     if (!$routeParams.itemId) {
       $scope.title = "Create item";
@@ -176,10 +163,13 @@
 
   appMain.controller('editProfileController', [
   '$scope', 'userProfile', function ($scope, userProfile) {
+    userProfile.pingSession();
+
     $scope.isNoValid = false;
     $scope.isNoValidPassword = false;
     $scope.isChangePasswordShow = false;
-    $scope.errorMessage = "";
+    $scope.actionMessage = "";
+    $scope.isOkResult = false;
     $scope.title = "Edit profile";
     $scope.prefix = "+380";
 
@@ -212,12 +202,18 @@
       if ($scope.phone)
         user.phone = $scope.prefix + $scope.phone;
 
-      userProfile.saveProfile(user, function() {
-        
+      userProfile.saveProfile(user, function(errorMessage) {
+        if (errorMessage) {
+          $scope.actionMessage = errorMessage;
+          $scope.isOkResult = false;
+        } else {
+          $scope.actionMessage = "Data is saved successfully!";
+          $scope.isOkResult = true;
+        }
       });
     };
 
-    $scope.savePassword = function (form) {
+    $scope.changePassword = function (form) {
       $scope.isNoValidPassword = !form.$valid;
       if (!form.$valid)
         return;

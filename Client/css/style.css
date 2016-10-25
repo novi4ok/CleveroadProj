@@ -111,9 +111,14 @@ body {
   font-size: 21px;
   font-weight: bold;
 }
+#mainContainer .dvActionMessage {
+  margin-bottom: 10px;
+}
 #mainContainer .dvErrorMessage {
-  margin-top: 10px;
   color: #ff0000;
+}
+#mainContainer .dvInfoMessage {
+  color: #009213;
 }
 #mainContainer .dvInfo {
   font-size: 13px;

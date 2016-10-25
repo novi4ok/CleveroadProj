@@ -165,6 +165,31 @@
         callback(data);
     },
 
+    changePassword: function (data, objResponse, callback) {
+      if (!data || !data.user || !data.user.sessionID || !data.user.id) {
+        objResponse.error = "Error: data";
+        if (callback)
+          callback();
+        return;
+      }
+
+      //var hashedPassword = "";
+      //if (data.user.password && data.user.password != "")
+      //  hashedPassword = passwordHash.generate(data.user.password);
+
+      var userFound = _.findWhere(userList, { id: data.user.id });
+      if (userFound) {
+        var user = data.user;
+        userFound.name = user.name;
+        passwordHash.generate('111111'),
+        data.user = userFound;
+      } else {
+        objResponse.error = "User isn't found!";
+      }
+      if (callback)
+        callback(data);
+    },
+
   };
   
 };

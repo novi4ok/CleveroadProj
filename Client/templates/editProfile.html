@@ -5,10 +5,12 @@
     <input type="button" ng-click="goBack()" value="Back to list" />
   </div>
 
-  <span class="spTitle">{{title}}</span>
-
-  <div ng-show="errorMessage" class="dvErrorMessage">
-    <span>{{errorMessage}}</span>
+  <div class="dvTitle">
+    <span class="spTitle">{{title}}</span>
+  </div>
+  
+  <div ng-show="actionMessage" class="dvActionMessage" ng-class="{dvErrorMessage: !isOkResult, dvInfoMessage: isOkResult}">
+    <span>{{actionMessage}}</span>
   </div>
 
   <div class="dvTableCtnr">
@@ -81,7 +83,7 @@
         </div>
 
         <div class="dvButtonsCtnr">
-          <input type="button" ng-click="savePassword(formPassword)" value="Save" />
+          <input type="button" ng-click="changePassword(formPassword)" value="Save" />
         </div>
       </div>
     </form>

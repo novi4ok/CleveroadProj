@@ -76,7 +76,8 @@
 
           self.setLoadingApplication(false);
         }, function error(response, status) {
-          self.setLoadingApplication(false);
+          $location.path('/login');
+          self.setLoadingApplication(false);          
         });
 
       },
@@ -128,6 +129,9 @@
         };
 
         self.httpRequest(data, function success(response) {
+          $rootScope.isUserInfoShow = false;
+          $rootScope.userActive = null;
+
           if (callback)
             callback();
         }, function error(response, status, headers) { });
@@ -138,6 +142,41 @@
           return;
 
         var action = "saveProfile";
+        var data = {
+          action: action,
+          user: userParams,
+        };
+
+        self.httpRequest(data, function success(response) {
+          var errorMessage = "";
+          if (!response.error) {
+            if (response.data && response.data.user && response.data.user.sessionID) {
+              var user = response.data.user;
+              self.setSession(user.sessionID, user);
+            }
+          } else {
+            if (!response.error || response.error === "")
+              errorMessage = "UNKNOWN ERROR";
+            else
+              errorMessage = response.error;
+          }
+          if (callback)
+            callback(errorMessage);
+        }, function error(response, status, headers) {
+          var errorMessage = (response ? "Error: " + response : "");
+          if (!errorMessage) {
+            errorMessage += "Error: status=" + status;
+          }
+          if (callback)
+            callback(errorMessage);
+        });
+      },
+
+      changeProfile: function (userParams, callback) {
+        if (!userParams)
+          return;
+
+        var action = "changeProfile";
         var data = {
           action: action,
           user: userParams,
