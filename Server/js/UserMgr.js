@@ -1,4 +1,5 @@
-﻿exports.UserMgr = function() {
+﻿// User Manager module
+exports.UserMgr = function () {
   var _ = require('underscore');
   var passwordHash = require('password-hash');
 

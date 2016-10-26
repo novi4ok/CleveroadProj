@@ -1,4 +1,6 @@
-﻿exports.ServerMgr = function () {
+﻿
+// Server Manager module
+exports.ServerMgr = function () {
   var self;
 
   var _ = require('underscore');
