@@ -26,7 +26,6 @@
       })
       .when('/404', {
         templateUrl: 'templates/404.html'
-        //controller: 'RedirectCtrl'
       })
       .otherwise({
         redirectTo: '/404'
@@ -42,9 +41,9 @@
   ]);
 
   appMain.controller('goodsListController', [
-      '$scope', '$window', '$location', 'userProfile', 'goodsList', goodsListController]);
+      '$scope', '$window', '$location', '$compile', 'userProfile', 'goodsList', goodsListController]);
 
-  appMain.factory('goodsList', goodsListFactory);
+  appMain.factory('goodsList', ['userProfile', 'utils', goodsListFactory]);
 
   appMain.controller('editItemController', [
   '$scope', '$routeParams', 'goodsList', '$location', editItemController]);

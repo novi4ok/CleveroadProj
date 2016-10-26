@@ -7,6 +7,9 @@
   var userMgrModule = require('./UserMgr.js');
   var userMgr = new userMgrModule.UserMgr();
 
+  var goodsMgrModule = require('./GoodsMgr.js');
+  var goodsMgr = new goodsMgrModule.GoodsMgr();
+
   var serverMgrObj = {
     constructor: function () {
       self = this;
@@ -21,6 +24,7 @@
 
     requestHandle: function (objResponse, request, response) {
       userMgr.setRequest(request);
+      goodsMgr.setRequest(request);
 
       if (request.method === "POST") {
         this.processPOST(request, response);
@@ -87,18 +91,12 @@
         }
 
         if (dataRequest) {
-
-          //if (!userMgr.isActionSecure(dataRequest.action)) {
-          //  if (!userMgr.isSessionExist(dataRequest.sessionID)) {
-          //    objResponse.error = "User's session doesn't exist!";
-          //    response.end(JSON.stringify(objResponse));
-          //    return;
-          //  } else if (!userMgr.hasAccess(dataRequest.action, dataRequest.sessionID)) {
-          //    objResponse.error = "User doesn't have the access to this operation!";
-          //    response.end(JSON.stringify(objResponse));
-          //    return;
-          //  }
-          //}
+          
+          if (dataRequest.action !== "login" && !userMgr.isSessionExist(dataRequest.sessionID)) {
+            objResponse.error = "User's session doesn't exist!";
+            response.end(JSON.stringify(objResponse));
+            return;
+          }
 
           switch (dataRequest.action) {
             case "login":
@@ -136,14 +134,27 @@
                 });
                 break;
               }
-            //case "changePassword":
-            //  {
-            //    userMgr.changePassword(dataRequest, objResponse, function () {
-            //      self.responseCallbackPOST(response, dataRequest, objResponse);
-            //    });
-            //    break;
-            //  }
-
+            case "getGoodsList":
+              {
+                goodsMgr.getGoodsList(objResponse, function () {
+                  self.responseCallbackPOST(response, dataRequest, objResponse);
+                });
+                break;
+              }
+            case "createItem":
+              {
+                goodsMgr.createItem(dataRequest, objResponse, function () {
+                  self.responseCallbackPOST(response, dataRequest, objResponse);
+                });
+                break;
+              }
+            case "editItem":
+              {
+                goodsMgr.editItem(dataRequest, objResponse, function () {
+                  self.responseCallbackPOST(response, dataRequest, objResponse);
+                });
+                break;
+              }
           }
         }
 

@@ -1,7 +1,8 @@
 ﻿function editItemController($scope, $routeParams, goodsList, $location) {
-  //userProfile.pingSession();
 
-  $scope.errorMessage = "";
+  $scope.isNoValid = false;
+  $scope.isOkResult = false;
+  $scope.actionMessage = "";
   if (!$routeParams.itemId) {
     $scope.title = "Create item";
     $scope.action = "Create";
@@ -21,13 +22,37 @@
     }
   }
 
-  $scope.saveItem = function () {
+  $scope.saveItem = function (form) {
+    $scope.isNoValid = !form.$valid;
+    if (!form.$valid)
+      return;
+
     if ($scope.goodsItem) {
-      $scope.goodsItem.name = $scope.name;
-      $scope.goodsItem.price = $scope.price;
-      $scope.goodsItem.description = $scope.description;
+      var goods = {
+        id: $scope.goodsItem.id,
+        name: $scope.name,
+        price: $scope.price,
+        description: $scope.description
+      };
+      goodsList.editItem(goods, function (resGoods, errorMessage) {
+        $scope.isOkResult = !errorMessage;
+        $scope.actionMessage = (!errorMessage ? "Item is successfully changed!" : errorMessage);
+        if (!errorMessage && resGoods) {
+          $scope.goodsItem.name = resGoods.name;
+          $scope.goodsItem.price = resGoods.price;
+          $scope.goodsItem.description = resGoods.description;
+        }
+      });
     } else {
-      goodsList.addItem({ name: $scope.name, price: $scope.price, description: $scope.description });
+      goodsList.createItem({ name: $scope.name, price: $scope.price, description: $scope.description }, function (errorMessage) {
+        $scope.isOkResult = !errorMessage;
+        $scope.actionMessage = (!errorMessage ? "Item is successfully created!" : errorMessage);
+        if (!errorMessage) {
+          $scope.name = "";
+          $scope.price = 0;
+          $scope.description = "";
+        }        
+      });
     }
   };
 

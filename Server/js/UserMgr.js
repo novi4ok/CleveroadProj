@@ -2,14 +2,6 @@
   var _ = require('underscore');
   var passwordHash = require('password-hash');
 
-  //var Modules = require('./Modules.js');
-
-  //var CONST = Modules.CONST;
-
-  //var database = Modules.Database;
-
-  //var roleMgrModule = require('./RoleMgr.js');
-  //var roleMgr = new roleMgrModule.RoleMgr();  
   var SESSION_TIME = 200 * 60 * 1000;
 
   var currentRequest;
@@ -40,7 +32,7 @@
     setRequest: function (request) {
       currentRequest = request;
     },
-
+    
     isSessionExist: function (sessionID) {
       if (sessionID && usersHash[sessionID]) {
         var user = usersHash[sessionID];
@@ -50,7 +42,7 @@
       else
         return false;
     },
-    
+
     updateMgr: function () {
       var keys = _.keys(usersHash);
       var delUsers = [];
@@ -158,7 +150,7 @@
         objResponse.error = "User isn't found!";
       }
       if (callback)
-        callback(data);
+        callback();
     },
 
     changePassword: function (data, objResponse, callback) {
@@ -178,7 +170,7 @@
         objResponse.error = "User isn't found!";
       }
       if (callback)
-        callback(data);
+        callback();
     },
 
   };

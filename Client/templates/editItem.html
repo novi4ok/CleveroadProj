@@ -5,40 +5,53 @@
     <input type="button" ng-click="backToList()" value="Back to list" />
   </div>
 
-  <span class="spTitle">{{title}}</span>
+  <div class="dvTitle">
+    <span class="spTitle">{{title}}</span>
+  </div>
 
-  <div ng-show="errorMessage" class="dvErrorMessage">
-    <span>{{errorMessage}}</span>
+  <div ng-show="actionMessage" class="dvActionMessage" ng-class="{dvErrorMessage: !isOkResult, dvInfoMessage: isOkResult}">
+    <span>{{actionMessage}}</span>
   </div>
 
   <div class="dvTableCtnr">
-    <table>
-      <tbody>
-        <tr>
-          <td>Name: </td>
-          <td>
-            <input type="text" ng-model="name" maxlength="255" required />
-          </td>
-        </tr>
-        <tr>
-          <td>Price: </td>
-          <td>
-            <input type="number" ng-model="price" value="{{price | priceFilter}}" step="0.01" required />
-          </td>
-        </tr>
-        <tr>
-          <td>Description:</td>
-          <td>
-            <textarea ng-model="description" maxlength="1000"></textarea>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <form name="form" novalidate>
+      <table>
+        <tbody>
+          <tr>
+            <td>Name: </td>
+            <td>
+              <input type="text" name="NameInput" ng-model="name" maxlength="255" required />
+              <div class="dvErrorMessage" ng-show="isNoValid && form.NameInput.$error.required">
+                <span>Required field!</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Price: </td>
+            <td>
+              <input type="number" name="PriceInput" ng-model="price" value="{{price | priceFilter}}" step="0.01" required/>
+              <!--<div class="dvErrorMessage" ng-show="isNoValid && form.PriceInput.$error.required">
+                <span>Required field!</span>
+              </div>-->
+            </td>
+          </tr>
+          <tr>
+            <td>Description:</td>
+            <td>
+              <textarea name="DescriptionText" ng-model="description" maxlength="1000" required></textarea>
+              <div class="dvErrorMessage" ng-show="isNoValid && form.DescriptionText.$error.required">
+                <span>Required field!</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-    <div class="dvButtonsCtnr">
-      <input type="submit" ng-click="saveItem()" value="{{action}}" />
-    </div>
+      <div class="dvButtonsCtnr">
+        <input type="submit" ng-click="saveItem(form)" value="{{action}}" />
+      </div>
 
+    </form>
   </div>
 
 </div>

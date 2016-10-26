@@ -1,7 +1,7 @@
 ﻿(function (angular) {
   'use strict';
   angular.module('utilsModule', [])
-  .factory('Utils', ['$http', '$rootScope', '$location', function ($http, $rootScope, $location) {
+  .factory('utils', ['$http', '$rootScope', '$location', function ($http, $rootScope, $location) {
 
     var urlServer = "http://localhost:80/";
 
@@ -16,9 +16,12 @@
           return;
 
         var url = urlServer;
+        var method = 'POST';
+        if (data.method)
+          method = data.method;
 
         var req = {
-          method: 'POST',
+          method: method,
           url: url,
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',

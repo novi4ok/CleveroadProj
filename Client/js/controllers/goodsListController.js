@@ -1,17 +1,19 @@
 ﻿
-function goodsListController($scope, $window, $location, userProfile, goodsList) {
+function goodsListController($scope, $window, $location, $compile, userProfile, goodsList) {
 
+  //var goodsListCtrl = {
+  //  constructor: function () {
+
+  //  },
+
+  //};
+
+  
   userProfile.pingSession();
 
   $scope.title = "List of goods";
 
-  $scope.goodsList = goodsList.getList();
-  $scope.filterCountList = [10, 20, 50];
-  $scope.filterCount = $scope.filterCountList[0];
-
-  $scope.filteredGoodsList = []
-  , $scope.currentPage = 1
-  , $scope.maxSize = 5;
+  
 
   var updateList = function () {
     var filterCount = parseInt($scope.filterCount);
@@ -21,6 +23,17 @@ function goodsListController($scope, $window, $location, userProfile, goodsList)
     $scope.filteredGoodsList = $scope.goodsList.slice(begin, end);
     $scope.isCheckAll = false;
   };
+
+  goodsList.getList(function(goodsList, errorMessage) {
+    $scope.goodsList = goodsList;
+    updateList();
+  });
+  $scope.filterCountList = [10, 20, 50];
+  $scope.filterCount = $scope.filterCountList[0];
+
+  $scope.filteredGoodsList = []
+  , $scope.currentPage = 1
+  , $scope.maxSize = 5;
 
   $scope.$watch('currentPage + filterCount', function () {
     updateList();
@@ -39,7 +52,12 @@ function goodsListController($scope, $window, $location, userProfile, goodsList)
     if (goods.isShowDetails) {
       detailsElem.text("Hide");
       detailsElem.addClass("tdDetailsOpen");
-      trParentElem.after("<tr class='trDetailsArea'><td colspan='5'>" + goods.description + "</td></tr>");
+
+      var contentFn = $compile("<tr class='trDetailsArea'><td colspan='5'>{{lastDetailsGoods.description}}</td></tr>");
+      var contentElems = contentFn($scope);
+      trParentElem.after(contentElems);
+
+      //trParentElem.after("<tr class='trDetailsArea'><td colspan='5'>" + goods.description + "</td></tr>");
     }
   };
 
@@ -69,24 +87,44 @@ function goodsListController($scope, $window, $location, userProfile, goodsList)
   };
 }
 
-function goodsListFactory () {
-  var goodsList;
+function goodsListFactory(userProfile, utils) {
+  var goodsList = [];
   var goodsListObj = {
+
     constructor: function () {
-      goodsList = [];
-      for (var i = 0; i < 1000; i++) {
-        goodsList.push(
-        {
-          id: i,
-          name: 'name' + i,
-          price: i * 1000.23,
-          description: 'description' + i
-        });
-      }
     },
 
-    getList: function () {
-      return goodsList;
+    getList: function (callback) {
+      var action = "getGoodsList";
+      var data = {
+        action: action,
+      };
+
+      var session = userProfile.getSession();
+      data.sessionID = (session ? session.id : '');
+
+      utils.httpRequest(data, function success(response) {
+        var errorMessage = "";
+        if (!response.error) {
+          if (response.data) {
+            goodsList = response.data;
+          }
+        } else {
+          if (!response.error || response.error === "")
+            errorMessage = "UNKNOWN ERROR";
+          else
+            errorMessage = response.error;
+        }
+        if (callback)
+          callback(goodsList, errorMessage);
+      }, function error(response, status, headers) {
+        var errorMessage = (response ? "Error: " + response : "");
+        if (!errorMessage) {
+          errorMessage += "Error: status=" + status;
+        }
+        if (callback)
+          callback(errorMessage);
+      });
     },
 
     getGoodsById: function (id) {
@@ -105,10 +143,74 @@ function goodsListFactory () {
       return itemFound;
     },
 
-    addItem: function (goods) {
-      goodsList.push(goods);
-    }
+    createItem: function (goods, callback) {
+      var action = "createItem";
+      var data = {
+        action: action,
+        goods: goods
+      };
+
+      var session = userProfile.getSession();
+      data.sessionID = (session ? session.id : '');
+
+      utils.httpRequest(data, function success(response) {
+        var errorMessage = "";
+        if (!response.error) {
+          if (response.data) {
+            goodsList.push(response.data);
+          }
+        } else {
+          if (!response.error || response.error === "")
+            errorMessage = "UNKNOWN ERROR";
+          else
+            errorMessage = response.error;
+        }
+        if (callback)
+          callback(errorMessage);
+      }, function error(response, status, headers) {
+        var errorMessage = (response ? "Error: " + response : "");
+        if (!errorMessage) {
+          errorMessage += "Error: status=" + status;
+        }
+        if (callback)
+          callback(errorMessage);
+      });
+
+    },
+
+    editItem: function (goods, callback) {
+      var action = "editItem";
+    var data = {
+      action: action,
+      goods: goods
+    };
+
+    var session = userProfile.getSession();
+    data.sessionID = (session ? session.id : '');
+
+    utils.httpRequest(data, function success(response) {
+      var errorMessage = "";
+      if (!response.error) {
+        
+      } else {
+        if (!response.error || response.error === "")
+          errorMessage = "UNKNOWN ERROR";
+        else
+          errorMessage = response.error;
+      }
+      if (callback)
+        callback(response.data, errorMessage);
+    }, function error(response, status, headers) {
+      var errorMessage = (response ? "Error: " + response : "");
+      if (!errorMessage) {
+        errorMessage += "Error: status=" + status;
+      }
+      if (callback)
+        callback(errorMessage);
+    });
+
+  }
   };
   goodsListObj.constructor();
   return goodsListObj;
-}
+} 

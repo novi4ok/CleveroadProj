@@ -1,7 +1,7 @@
 ﻿(function (angular) {
   'use strict';
   var userProfileModule = angular.module('userProfileModule', ['utilsModule'])
-  .factory('userProfile', ['$rootScope', '$window', '$location', 'Utils', function ($rootScope, $window, $location, Utils) {
+  .factory('userProfile', ['$rootScope', '$window', '$location', 'utils', function ($rootScope, $window, $location, utils) {
     var self;
     var prefixStorage = "testingApp_";
 
@@ -49,9 +49,9 @@
           sessionID: (session ? session.id : '')
         };
 
-        Utils.setLoadingApplication(true);
+        utils.setLoadingApplication(true);
 
-        Utils.httpRequest(data, function success(response) {
+        utils.httpRequest(data, function success(response) {
           if (!response.error) {
             if (response.data && response.data.user && response.data.user.sessionID) {
               var user = response.data.user;
@@ -61,10 +61,10 @@
             $location.path('/login');
           }
 
-          Utils.setLoadingApplication(false);
+          utils.setLoadingApplication(false);
         }, function error(response, status) {
           $location.path('/login');
-          Utils.setLoadingApplication(false);
+          utils.setLoadingApplication(false);
         });
 
       },
@@ -82,7 +82,7 @@
         var session = self.getSession();
         data.sessionID = (session ? session.id : '');
 
-        Utils.httpRequest(data, function success(response) {
+        utils.httpRequest(data, function success(response) {
           var errorMessage = "";
           if (!response.error) {
             if (response.data && response.data.user && response.data.user.sessionID) {
@@ -118,7 +118,7 @@
           sessionID: (session ? session.id : '')
         };
 
-        Utils.httpRequest(data, function success(response) {
+        utils.httpRequest(data, function success(response) {
           $rootScope.isUserInfoShow = false;
           $rootScope.userActive = null;
 
@@ -137,7 +137,7 @@
           user: userParams,
         };
 
-        Utils.httpRequest(data, function success(response) {
+        utils.httpRequest(data, function success(response) {
           var errorMessage = "";
           if (!response.error) {
             if (response.data && response.data.user && response.data.user.sessionID) {
@@ -175,7 +175,7 @@
         var session = self.getSession();
         data.sessionID = (session ? session.id : '');
 
-        Utils.httpRequest(data, function success(response) {
+        utils.httpRequest(data, function success(response) {
           var errorMessage = "";
           if (!response.error) {
             if (response.data && response.data.user && response.data.user.sessionID) {
