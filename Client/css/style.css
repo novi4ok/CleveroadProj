@@ -44,28 +44,6 @@ body {
   font-family: Arial, sans-serif;
   padding: 40px 15px 0px 15px;
 }
-#mainContainer .dvContentCtnr .dvEditProperty .dvView {
-  cursor: pointer;
-}
-#mainContainer .dvContentCtnr .dvEditProperty .dvView img {
-  margin-left: 1px;
-  position: relative;
-  top: 1px;
-}
-#mainContainer .dvContentCtnr .dvEditProperty .dvChange input {
-  width: 100%;
-}
-#mainContainer .dvContentCtnr .dvEditProperty .dvChange input.ng-invalid {
-  background-color: #fd7b80;
-  border: 1px solid #c37171;
-}
-#mainContainer .dvContentCtnr .dvEditProperty .dvChange .spRequired {
-  color: #ff0000;
-}
-#mainContainer .dvContentCtnr #hintSection {
-  margin-top: 15px;
-  font-size: 14px;
-}
 #mainContainer .dvTableCtnr {
   padding-bottom: 15px;
 }
