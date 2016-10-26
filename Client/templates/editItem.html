@@ -20,7 +20,7 @@
           <tr>
             <td>Name: </td>
             <td>
-              <input type="text" name="NameInput" ng-model="name" maxlength="255" required />
+              <input type="text" name="NameInput" ng-model="goodsItem.name" maxlength="255" required />
               <div class="dvErrorMessage" ng-show="isNoValid && form.NameInput.$error.required">
                 <span>Required field!</span>
               </div>
@@ -29,7 +29,7 @@
           <tr>
             <td>Price: </td>
             <td>
-              <input type="number" name="PriceInput" ng-model="price" value="{{price | priceFilter}}" step="0.01" required/>
+              <input type="number" name="PriceInput" ng-model="goodsItem.price" value="{{price | priceFilter}}" step="0.01" required />
               <!--<div class="dvErrorMessage" ng-show="isNoValid && form.PriceInput.$error.required">
                 <span>Required field!</span>
               </div>-->
@@ -38,7 +38,7 @@
           <tr>
             <td>Description:</td>
             <td>
-              <textarea name="DescriptionText" ng-model="description" maxlength="1000" required></textarea>
+              <textarea name="DescriptionText" ng-model="goodsItem.description" maxlength="1000" required></textarea>
               <div class="dvErrorMessage" ng-show="isNoValid && form.DescriptionText.$error.required">
                 <span>Required field!</span>
               </div>

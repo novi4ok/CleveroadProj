@@ -41,15 +41,16 @@
   ]);
 
   appMain.controller('goodsListController', [
-      '$scope', '$window', '$location', '$compile', 'userProfile', 'goodsList', goodsListController]);
-
-  appMain.factory('goodsList', ['userProfile', 'utils', goodsListFactory]);
+      '$scope', '$location', '$compile', 'userProfile', 'goodsList', goodsListController]);
 
   appMain.controller('editItemController', [
-  '$scope', '$routeParams', 'goodsList', '$location', editItemController]);
+  '$scope', '$routeParams', 'goodsList', editItemController]);
 
   appMain.controller('editProfileController', [
   '$scope', 'userProfile', editProfileController]);
+
+
+  appMain.factory('goodsList', ['userProfile', 'utils', goodsListFactory]);
 
   appMain.directive('numericOnly', numericOnlyDirective);
 

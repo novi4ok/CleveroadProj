@@ -82,10 +82,6 @@ body {
 }
 #mainContainer .dvTableCtnr table tr td {
   border-top: none;
-  /*a {
-              text-decoration: none;
-              color: @textColor;
-            }*/
 }
 #mainContainer .dvTableCtnr table tr th:last-child,
 #mainContainer .dvTableCtnr table tr td:last-child {
@@ -103,6 +99,9 @@ body {
 }
 #mainContainer .dvTableCtnr table tr.selected .dvEditProperty .dvChange .spRequired {
   color: #ffed01;
+}
+#mainContainer .dvTableCtnr textarea {
+  min-height: 100px;
 }
 #mainContainer .dvTitle {
   margin-bottom: 20px;
