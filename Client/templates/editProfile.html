@@ -44,7 +44,7 @@
           <tr>
             <td>Phone: </td>
             <td class="tdPhone">
-              <span>+380</span><input type="text" name="Phone" ng-model="phone" numeric-only minlength="9" maxlength="9" placeholder="XXХХХХХХХ" />
+              <span>+380</span><input type="text" numeric-only name="Phone" ng-model="phone" minlength="9" maxlength="9" placeholder="XXХХХХХХХ" />
               <div class="dvErrorMessage" ng-show="form.Phone.$dirty && isNoValid && (form.Phone.$error.minlength || form.Phone.$error.maxlength)">
                 <span>Phone number should have 9 digits</span>
               </div>

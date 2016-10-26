@@ -1,4 +1,4 @@
-﻿
+﻿// Controller for working with the list of goods
 function goodsListController($scope, $location, $compile, userProfile, goodsList) {
 
   var self;
@@ -91,6 +91,7 @@ function goodsListController($scope, $location, $compile, userProfile, goodsList
   return goodsListCtrl;
 }
 
+// service for getting/changing of the goods list 
 function goodsListFactory(userProfile, utils) {
   var goodsList = [];
   var goodsListObj = {
@@ -114,18 +115,12 @@ function goodsListFactory(userProfile, utils) {
             goodsList = response.data;
           }
         } else {
-          if (!response.error || response.error === "")
-            errorMessage = "UNKNOWN ERROR";
-          else
-            errorMessage = response.error;
+          errorMessage = response.error;
         }
         if (callback)
           callback(goodsList, errorMessage);
       }, function error(response, status, headers) {
-        var errorMessage = (response ? "Error: " + response : "");
-        if (!errorMessage) {
-          errorMessage += "Error: status=" + status;
-        }
+        var errorMessage = (response ? "Error: " + response : "Error: status=" + status);
         if (callback)
           callback(errorMessage);
       });
@@ -164,18 +159,12 @@ function goodsListFactory(userProfile, utils) {
             goodsList.push(response.data);
           }
         } else {
-          if (!response.error || response.error === "")
-            errorMessage = "UNKNOWN ERROR";
-          else
-            errorMessage = response.error;
+          errorMessage = response.error;
         }
         if (callback)
           callback(errorMessage);
       }, function error(response, status, headers) {
-        var errorMessage = (response ? "Error: " + response : "");
-        if (!errorMessage) {
-          errorMessage += "Error: status=" + status;
-        }
+        var errorMessage = (response ? "Error: " + response : "Error: status=" + status);
         if (callback)
           callback(errorMessage);
       });
@@ -197,18 +186,12 @@ function goodsListFactory(userProfile, utils) {
         if (!response.error) {
         
         } else {
-          if (!response.error || response.error === "")
-            errorMessage = "UNKNOWN ERROR";
-          else
-            errorMessage = response.error;
+          errorMessage = response.error;
         }
         if (callback)
           callback(response.data, errorMessage);
       }, function error(response, status, headers) {
-        var errorMessage = (response ? "Error: " + response : "");
-        if (!errorMessage) {
-          errorMessage += "Error: status=" + status;
-        }
+        var errorMessage = (response ? "Error: " + response : "Error: status=" + status);
         if (callback)
           callback(errorMessage);
       });

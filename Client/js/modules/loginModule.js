@@ -1,4 +1,5 @@
-﻿(function (angular) {
+﻿// Login module - the loggining into the system
+(function (angular) {
   'use strict';
   var loginModule = angular.module('loginModule', ['userProfileModule']);
 

@@ -1,4 +1,5 @@
-﻿function editItemController($scope, $routeParams, goodsList) {
+﻿// Controller for the editing of the items
+function editItemController($scope, $routeParams, goodsList) {
   var self;
   var isEditAction = false;
   var goodsItem;
@@ -75,6 +76,7 @@
   return editItemCtrl;
 }
 
+// Price filter - change the symbol "." on "," 
 function priceFilter() {
   return function (value) {
     if (!value)

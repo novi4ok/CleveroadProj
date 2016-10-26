@@ -1,4 +1,5 @@
-﻿function editProfileController($scope, userProfile) {
+﻿// Controller for the editing of user profile
+function editProfileController($scope, userProfile) {
 
   var editProfileCtrl = {
     constructor: function() {
@@ -88,6 +89,7 @@
   return editProfileCtrl;
 }
 
+// "Only numbers entering" directive
 function numericOnlyDirective() {
   return {
     require: 'ngModel',

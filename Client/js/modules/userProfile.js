@@ -1,4 +1,5 @@
-﻿(function (angular) {
+﻿// User profile module - logging
+(function (angular) {
   'use strict';
   var userProfileModule = angular.module('userProfileModule', ['utilsModule'])
   .factory('userProfile', ['$rootScope', '$window', '$location', 'utils', function ($rootScope, $window, $location, utils) {
@@ -92,19 +93,13 @@
               errorMessage = "User's session doesn't exist!";
             }
           } else {
-            if (!response.error || response.error === "")
-              errorMessage = "UNKNOWN ERROR";
-            else
-              errorMessage = response.error;
+            errorMessage = response.error;
           }
 
           if (callback)
             callback(errorMessage);
         }, function error(response, status, headers) {
-          var errorMessage = (response ? "Error: " + response : "");
-          if (!errorMessage) {
-            errorMessage += "Error: status=" + status;
-          }
+          var errorMessage = (response ? "Error: " + response : "Error: status=" + status);
           if (callback)
             callback(errorMessage);
         });
@@ -145,18 +140,12 @@
               self.setSession(user.sessionID, user);
             }
           } else {
-            if (!response.error || response.error === "")
-              errorMessage = "UNKNOWN ERROR";
-            else
-              errorMessage = response.error;
+            errorMessage = response.error;
           }
           if (callback)
             callback(errorMessage);
         }, function error(response, status, headers) {
-          var errorMessage = (response ? "Error: " + response : "");
-          if (!errorMessage) {
-            errorMessage += "Error: status=" + status;
-          }
+          var errorMessage = (response ? "Error: " + response : "Error: status=" + status);
           if (callback)
             callback(errorMessage);
         });
@@ -183,18 +172,12 @@
               self.setSession(user.sessionID, user);
             }
           } else {
-            if (!response.error || response.error === "")
-              errorMessage = "UNKNOWN ERROR";
-            else
-              errorMessage = response.error;
+            errorMessage = response.error;
           }
           if (callback)
             callback(errorMessage);
         }, function error(response, status, headers) {
-          var errorMessage = (response ? "Error: " + response : "");
-          if (!errorMessage) {
-            errorMessage += "Error: status=" + status;
-          }
+          var errorMessage = (response ? "Error: " + response : "Error: status=" + status);
           if (callback)
             callback(errorMessage);
         });
