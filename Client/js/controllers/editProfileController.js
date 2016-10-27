@@ -1,11 +1,16 @@
-﻿// Controller for the editing of user profile
+﻿"use strict";
+
+// Controller for the editing of user profile
 function editProfileController($scope, userProfile) {
+  var self;
 
   var editProfileCtrl = {
-    constructor: function() {
+    constructor: function () {
+      self = this;
+
       userProfile.pingSession();
-      var sessionUser = userProfile.getSession();
-      if (!sessionUser || !sessionUser.user)
+      var session = userProfile.getSession();
+      if (!session || !session.user)
         return;
 
       $scope.title = "Edit profile";
@@ -17,7 +22,7 @@ function editProfileController($scope, userProfile) {
       $scope.isOkResult = false;
       $scope.prefix = "+380";
 
-      var user = sessionUser.user;
+      var user = session.user;
       $scope.name = user.name;
       $scope.surname = user.surname;
       $scope.email = user.email;
@@ -41,6 +46,8 @@ function editProfileController($scope, userProfile) {
         return;
 
       var userParams = {};
+      var session = userProfile.getSession();
+      var user = session.user;
       userParams.sessionID = user.sessionID;
       userParams.id = user.id;
       userParams.name = $scope.name;
@@ -96,7 +103,7 @@ function numericOnlyDirective() {
     link: function (scope, element, attrs, modelCtrl) {
 
       modelCtrl.$parsers.push(function (inputValue) {
-        var transformedInput = inputValue ? inputValue.replace(/[^\d.-]/g, '') : null;
+        var transformedInput = inputValue ? inputValue.replace(/[^\d,-]/g, '') : null;
 
         if (transformedInput != inputValue) {
           modelCtrl.$setViewValue(transformedInput);

@@ -64,14 +64,13 @@
         <div class="dvField">
           <input ng-model="newPassword" name="NewPassword" type="password" placeholder="New password" ng-minlength="6" ng-maxlength="16" ng-pattern="[a-zA-Z0-9]+" required>
           <div class="dvInfo">
-            <span>6-16 characters [a-zA-Z0-9]</span>
+            <span>6-16 amount, characters [a-zA-Z0-9]</span>
           </div>
           <div class="dvErrorMessage" ng-show="isNoValidPassword && formPassword.NewPassword.$error.required">
             <span>Required field!</span>
           </div>
-          <div class="dvErrorMessage" ng-show="isNoValidPassword && (formPassword.NewPassword.$error.minlength || formPassword.NewPassword.$error.maxlength)">
-            <!--<span>Invalid password! - should have the size from 6 to 16 and contains the symbols [a-zA-Z0-9]</span>-->
-            <span>Invalid password!</span>
+          <div class="dvErrorMessage" ng-show="isNoValid && (formPassword.NewPassword.$error.minlength || formPassword.NewPassword.$error.maxlength || formPassword.NewPassword.$error.pattern)">
+            <span>Wrong format!</span>
           </div>
         </div>
 

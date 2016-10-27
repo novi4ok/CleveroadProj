@@ -18,7 +18,7 @@
       <table>
         <tbody>
           <tr>
-            <td>Name: </td>
+            <td>Name:* </td>
             <td>
               <input type="text" name="NameInput" ng-model="goodsItem.name" maxlength="255" required />
               <div class="dvErrorMessage" ng-show="isNoValid && form.NameInput.$error.required">
@@ -29,14 +29,17 @@
           <tr>
             <td>Price: </td>
             <td>
-              <input type="number" name="PriceInput" ng-model="goodsItem.price" value="{{price | priceFilter}}" step="0.01" required />
-              <!--<div class="dvErrorMessage" ng-show="isNoValid && form.PriceInput.$error.required">
+              <input type="text" numeric-only name="PriceInput" ng-model="goodsItem.price" value="{{price | priceFilter}}" ng-pattern="/^[\d]+,\d{2}$/g" ng-pattern="[\d]+,\d{2}" placeholder="XXXX,XX" required />
+              <div class="dvErrorMessage" ng-show="isNoValid && form.PriceInput.$error.required">
                 <span>Required field!</span>
-              </div>-->
+              </div>
+              <div class="dvErrorMessage" ng-show="isNoValid && form.PriceInput.$error.pattern">
+                <span>Wrong format - must be XXXX,XX</span>
+              </div>
             </td>
           </tr>
           <tr>
-            <td>Description:</td>
+            <td>Description:*</td>
             <td>
               <textarea name="DescriptionText" ng-model="goodsItem.description" maxlength="1000" required></textarea>
               <div class="dvErrorMessage" ng-show="isNoValid && form.DescriptionText.$error.required">

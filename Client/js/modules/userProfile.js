@@ -132,6 +132,9 @@
           user: userParams,
         };
 
+        var session = self.getSession();
+        data.sessionID = (session ? session.id : '');
+
         utils.httpRequest(data, function success(response) {
           var errorMessage = "";
           if (!response.error) {

@@ -1,4 +1,6 @@
-﻿// Controller for the editing of the items
+﻿"use strict";
+
+// Controller for the editing of the items
 function editItemController($scope, $routeParams, goodsList) {
   var self;
   var isEditAction = false;

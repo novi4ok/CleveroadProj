@@ -1,4 +1,6 @@
-﻿// Controller for working with the list of goods
+﻿"use strict";
+
+// Controller for working with the list of goods
 function goodsListController($scope, $location, $compile, userProfile, goodsList) {
 
   var self;
