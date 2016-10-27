@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 // Controller for the editing of the items
-function editItemController($scope, $routeParams, goodsList) {
+function editItemController($scope, $routeParams, $filter, goodsList) {
   var self;
   var isEditAction = false;
   var goodsItem;
@@ -18,18 +18,20 @@ function editItemController($scope, $routeParams, goodsList) {
         $scope.title = "Edit item";
         $scope.action = "Save";
         goodsItem = goodsList.getGoodsById($routeParams.itemId);
-        if (!$scope.goodsItem) {
+        if (!goodsItem) {
           $scope.errorMessage = "Item isn't found!";
         } else {
-          $scope.goodsItem = {};
-        }
-        $scope.goodsItem = goodsItem;
+          if (!goodsItem.price)
+            goodsItem.price = 0;
+          goodsItem.priceStr = $filter('priceFilter')(goodsItem.price);
+          $scope.goodsItem = goodsItem;
+        }        
       } else {
         $scope.title = "Create item";
         $scope.action = "Create";
         goodsItem = {
           name: "",
-          price: 0,
+          priceStr: '0,00',
           description: ""
         };
         $scope.goodsItem = goodsItem;
@@ -42,12 +44,12 @@ function editItemController($scope, $routeParams, goodsList) {
       $scope.isNoValid = !form.$valid;
       if (!form.$valid)
         return;
-
+      
       if (isEditAction) {
         var goods = {
           id: goodsItem.id,
           name: goodsItem.name,
-          price: goodsItem.price,
+          price: parseFloat(goodsItem.priceStr),
           description: goodsItem.description
         };
         goodsList.editItem(goods, function (errorMessage) {
@@ -57,7 +59,7 @@ function editItemController($scope, $routeParams, goodsList) {
           }
         });
       } else {
-        goodsList.createItem({ name: goodsItem.name, price: goodsItem.price, description: goodsItem.description }, function (errorMessage) {
+        goodsList.createItem({ name: goodsItem.name, price: parseFloat(goodsItem.priceStr), description: goodsItem.description }, function (errorMessage) {
           $scope.isOkResult = !errorMessage;
           $scope.actionMessage = (!errorMessage ? "Item is successfully created!" : errorMessage);
           if (!errorMessage) {
@@ -80,6 +82,8 @@ function priceFilter() {
   return function (value) {
     if (!value)
       value = 0;
-    return parseFloat(value).toFixed(2).toString().replace('.', ',');
+    value = value.toString();
+    var valFloat = (value.indexOf(",") >= 0 ? parseFloat(value.replace(',', '.')) : parseFloat(value));
+    return valFloat.toFixed(2).toString().replace('.', ',');
   };
 }

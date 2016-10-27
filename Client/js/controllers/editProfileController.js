@@ -20,7 +20,8 @@ function editProfileController($scope, userProfile) {
       $scope.isChangePasswordShow = false;
       $scope.actionMessage = "";
       $scope.isOkResult = false;
-      $scope.prefix = "+380";
+      $scope.phoneCode = "380";
+      $scope.phonePrefix = "+" + $scope.phoneCode;
 
       var user = session.user;
       $scope.name = user.name;
@@ -28,7 +29,7 @@ function editProfileController($scope, userProfile) {
       $scope.email = user.email;
       if (!user.phone)
         user.phone = "";
-      $scope.phone = user.phone.replace($scope.prefix, "");
+      $scope.phone = user.phone.replace($scope.phoneCode, "").replace(/[+ ]/, "");
 
       var editProfileCtnrElem = angular.element(document.querySelector("#editProfileCtnr"));
       editProfileCtnrElem.find("input").bind("keydown", function () {
@@ -54,7 +55,7 @@ function editProfileController($scope, userProfile) {
       userParams.surname = $scope.surname;
       userParams.email = $scope.email;
       if ($scope.phone)
-        userParams.phone = $scope.prefix + $scope.phone;
+        userParams.phone = $scope.phonePrefix + $scope.phone;
 
       $scope.isRequestProcessing = true;
       userProfile.saveProfile(userParams, function (errorMessage) {
@@ -75,8 +76,9 @@ function editProfileController($scope, userProfile) {
         return;
 
       var userParams = {};
-      userParams.sessionID = user.sessionID;
-      userParams.id = user.id;
+      var session = userProfile.getSession();
+      userParams.sessionID = session.user.sessionID;
+      userParams.id = session.user.id;
       userParams.newPassword = $scope.newPassword;
 
       userProfile.changePassword(userParams, function (errorMessage) {

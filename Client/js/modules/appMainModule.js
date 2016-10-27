@@ -34,6 +34,7 @@
     
   }]);
   
+
   // appController
   appMain.controller('appController', [
     '$scope', '$window', 'userProfile', function ($scope, $window, userProfile) {
@@ -50,7 +51,7 @@
 
   // editItemController
   appMain.controller('editItemController', [
-  '$scope', '$routeParams', 'goodsList', editItemController]);
+  '$scope', '$routeParams', '$filter', 'goodsList', editItemController]);
 
   // editProfileController
   appMain.controller('editProfileController', [
