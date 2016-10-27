@@ -2,7 +2,7 @@
 function goodsListController($scope, $location, $compile, userProfile, goodsList) {
 
   var self;
-  var templateDetails = "<tr class='trDetailsArea'><td colspan='5'><strong>Description: </strong>{{lastDetailsGoods.description}}</td></tr>";
+  var templateDetails = "<tr class='trDetailsArea'><td colspan='5'><div><strong>Description: </strong>{{lastDetailsGoods.description}}</div></td></tr>";
 
   var goodsListCtrl = {
     constructor: function () {
@@ -38,6 +38,9 @@ function goodsListController($scope, $location, $compile, userProfile, goodsList
     },
 
     updateList: function () {
+      if (!$scope.goodsList)
+        return;
+
       var filterCount = parseInt($scope.filterCount);
       var begin = (($scope.currentPage - 1) * filterCount), end = begin + filterCount;
 
@@ -63,6 +66,12 @@ function goodsListController($scope, $location, $compile, userProfile, goodsList
         var tmplDetails = $compile(templateDetails);
         var contentDetails = tmplDetails($scope);
         trParentElem.after(contentDetails);
+
+        var tableELem = trParentElem.parent();
+        var divElem = angular.element(tableELem[0].querySelector(".trDetailsArea")).find("div");
+        setTimeout(function() {
+          divElem.addClass("expandArea");
+        }, 5);        
       }
     },
 
