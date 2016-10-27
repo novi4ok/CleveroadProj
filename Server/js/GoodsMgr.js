@@ -17,14 +17,16 @@
 
     populateList: function() {
       goodsList = [];
+      var startPrice = 1000.01;
       for (var i = 0; i < 1000; i++) {
         goodsList.push(
         {
           id: i,
           name: 'name' + i,
-          price: i * 1000.23,
+          price: startPrice + i,
           description: 'description' + i
         });
+        startPrice += 0.01;
       }
     },
 

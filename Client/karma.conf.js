@@ -19,6 +19,7 @@ module.exports = function(config) {
       'js/lib/angular-route.min.js',
       'js/lib/angular-mocks.js',
       'js/modules/*.js',
+	  'js/controllers/*.js',
       'templates/*.html',
 
       'tests/*.js'

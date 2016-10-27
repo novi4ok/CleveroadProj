@@ -49,7 +49,7 @@ function editItemController($scope, $routeParams, $filter, goodsList) {
         var goods = {
           id: goodsItem.id,
           name: goodsItem.name,
-          price: parseFloat(goodsItem.priceStr),
+          price: parseFloat(goodsItem.priceStr.replace(",",".")),
           description: goodsItem.description
         };
         goodsList.editItem(goods, function (errorMessage) {
@@ -59,7 +59,7 @@ function editItemController($scope, $routeParams, $filter, goodsList) {
           }
         });
       } else {
-        goodsList.createItem({ name: goodsItem.name, price: parseFloat(goodsItem.priceStr), description: goodsItem.description }, function (errorMessage) {
+        goodsList.createItem({ name: goodsItem.name, price: parseFloat(goodsItem.priceStr.replace(",", ".")), description: goodsItem.description }, function (errorMessage) {
           $scope.isOkResult = !errorMessage;
           $scope.actionMessage = (!errorMessage ? "Item is successfully created!" : errorMessage);
           if (!errorMessage) {
