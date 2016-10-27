@@ -86,7 +86,7 @@ function editProfileController($scope, userProfile) {
           $scope.actionMessage = errorMessage;
           $scope.isOkResult = false;
         } else {
-          $scope.actionMessage = "Data is saved successfully!";
+          $scope.actionMessage = "Password is changed successfully!";
           $scope.isOkResult = true;
         }
       });

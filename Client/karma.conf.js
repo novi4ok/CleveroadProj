@@ -18,9 +18,10 @@ module.exports = function(config) {
       'js/lib/angular.min.js',
       'js/lib/angular-route.min.js',
       'js/lib/angular-mocks.js',
+      'js/lib/ui-bootstrap-tpls-0.12.1.min.js',      
+      'js/controllers/*.js',
       'js/modules/*.js',
-	  'js/controllers/*.js',
-      'templates/*.html',
+	    'templates/*.html',
 
       'tests/*.js'
     ],
