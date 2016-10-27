@@ -25,9 +25,9 @@
         <entry file="file://$PROJECT_DIR$/Server/server.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+              <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
               <folding>
-                <marker date="1477471866895" expanded="true" signature="889:1123" placeholder="{...}" />
+                <marker date="1477523467544" expanded="true" signature="875:1109" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -37,7 +37,7 @@
         <entry file="file://$PROJECT_DIR$/Server/js/ServerMgr.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="155" column="45" selection-start-line="155" selection-start-column="45" selection-end-line="155" selection-end-column="45" />
+              <caret line="156" column="19" selection-start-line="156" selection-start-column="19" selection-end-line="156" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -59,8 +59,8 @@
       <file leaf-file-name="GoodsMgr.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Server/js/GoodsMgr.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5769231">
-              <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+            <state vertical-scroll-proportion="0.6494845">
+              <caret line="99" column="6" selection-start-line="99" selection-start-column="6" selection-end-line="99" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -76,6 +76,7 @@
       <list>
         <option value="$PROJECT_DIR$/Server/js/UserMgr.js" />
         <option value="$PROJECT_DIR$/Server/js/ServerMgr.js" />
+        <option value="$PROJECT_DIR$/Server/server.js" />
         <option value="$PROJECT_DIR$/Server/js/GoodsMgr.js" />
       </list>
     </option>
@@ -227,7 +228,7 @@
       <recursive>false</recursive>
       <method />
     </configuration>
-    <configuration default="false" name="CleveroadProj" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="$PROJECT_DIR$/../node" path-to-js-file="Server/server.js" working-dir="d:/Projects/CleveroadProj/">
+    <configuration default="false" name="CleveroadProj" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="$PROJECT_DIR$/../node" path-to-js-file="Server/server.js" working-dir="$PROJECT_DIR$/">
       <method />
     </configuration>
     <list size="2">
@@ -265,7 +266,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4483568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39788732" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -312,12 +313,19 @@
           <line>136</line>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/Server/js/GoodsMgr.js</url>
+          <line>76</line>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="38" />
+      <option name="time" value="56" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="NodeJSConfigurationType">
-        <watch expression="contentType" language="JavaScript" />
+        <watch expression="_.without(goodsList, goodsFound)" language="JavaScript" />
+        <watch expression="goodsList[0]" language="JavaScript" />
+        <watch expression="_.findWhere(goodsList, { id: 21212 })" language="JavaScript" />
       </configuration>
     </watches-manager>
   </component>
@@ -327,7 +335,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
-            <marker date="1477471866895" expanded="true" signature="889:1123" placeholder="{...}" />
+            <marker date="1477523467544" expanded="true" signature="875:1109" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -364,7 +372,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1477471866895" expanded="true" signature="889:1123" placeholder="{...}" />
+            <marker date="1477523467544" expanded="true" signature="875:1109" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -382,7 +390,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="40" column="25" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
           <folding>
-            <marker date="1477471866895" expanded="true" signature="889:1123" placeholder="{...}" />
+            <marker date="1477523467544" expanded="true" signature="875:1109" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -411,7 +419,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="40" column="25" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
           <folding>
-            <marker date="1477471866895" expanded="true" signature="889:1123" placeholder="{...}" />
+            <marker date="1477523467544" expanded="true" signature="875:1109" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -440,7 +448,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="29" column="25" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
           <folding>
-            <marker date="1477471866895" expanded="true" signature="889:1123" placeholder="{...}" />
+            <marker date="1477523467544" expanded="true" signature="875:1109" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -469,17 +477,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1477471866895" expanded="true" signature="889:1123" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding>
-            <marker date="1477471866895" expanded="true" signature="889:1123" placeholder="{...}" />
+            <marker date="1477523467544" expanded="true" signature="875:1109" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -495,14 +493,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/js/ServerMgr.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="155" column="45" selection-start-line="155" selection-start-column="45" selection-end-line="155" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3327869">
@@ -510,10 +500,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Server/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
+          <folding>
+            <marker date="1477523467544" expanded="true" signature="875:1109" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/js/ServerMgr.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="156" column="19" selection-start-line="156" selection-start-column="19" selection-end-line="156" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Server/js/GoodsMgr.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5769231">
-          <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.6494845">
+          <caret line="99" column="6" selection-start-line="99" selection-start-column="6" selection-end-line="99" selection-end-column="6" />
           <folding />
         </state>
       </provider>

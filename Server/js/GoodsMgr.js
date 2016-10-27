@@ -74,6 +74,31 @@
         callback();
     },
 
+    deleteItems: function (data, objResponse, callback) {
+      if (!data || !data.goodsItems) {
+        objResponse.error = "Error: data";
+        if (callback)
+          callback();
+        return;
+      }
+
+      objResponse.data = [];
+      var goodsRemoved = [];
+      data.goodsItems.forEach(function (item) {
+        var goodsFound = _.findWhere(goodsList, { id: item.id });
+        if (goodsFound) {
+          goodsList = _.without(goodsList, goodsFound);
+          goodsRemoved.push(item);
+        } else {
+          objResponse.error += "Goods id=" + item.id + " isn't found!";
+        }
+
+      });
+      objResponse.data = goodsRemoved;
+      if (callback)
+        callback();
+    },
+
   };
 
   goodsMgrObj.constructor();

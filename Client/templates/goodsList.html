@@ -5,8 +5,12 @@
     <span class="spTitle">{{title}}</span>
   </div>
 
+  <div ng-show="actionMessage" class="dvActionMessage" ng-class="{dvErrorMessage: !isOkResult, dvInfoMessage: isOkResult}">
+    <span>{{actionMessage}}</span>
+  </div>
+
   <div class="dvButtonsCtnr">
-    <input type="button" value="Delete selected" ng-click="deleteSelected()">
+    <input type="button" value="Delete selected" ng-disabled="!isItemChecked && !isCheckAll" ng-click="deleteSelected()">
     <input type="button" value="Create new" ng-click="createNew()">    
   </div>
   <div class="dvPagination">
@@ -19,6 +23,7 @@
 
     <pagination ng-model="currentPage"
                 total-items="goodsList.length"
+                previous-text="‹" next-text="›" first-text="«" last-text="»"
                 max-size="maxSize"
                 boundary-links="true"
                 boundary-link-numbers="true"
@@ -37,7 +42,7 @@
       </tr>
 
       <tr ng-repeat="goods in filteredGoodsList" ng-class="{'selected': goods.checked}">
-        <td><input type="checkbox" ng-model="goods.checked" /></td>
+        <td><input type="checkbox" ng-model="goods.checked" ng-click="updateCheckItem()" /></td>
         <td>{{goods.id}}</td>
         <td>{{goods.name}}</td>
         <td>{{goods.price | priceFilter }}</td>

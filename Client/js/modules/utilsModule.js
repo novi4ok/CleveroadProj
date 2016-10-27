@@ -1,4 +1,5 @@
-﻿(function (angular) {
+﻿// Utils module
+(function (angular) {
   'use strict';
   angular.module('utilsModule', [])
   .factory('utils', ['$http', '$rootScope', '$location', function ($http, $rootScope, $location) {

@@ -29,7 +29,9 @@ function goodsListController($scope, $location, $compile, userProfile, goodsList
       $scope.detailsClick = self.detailsClick;
 
       $scope.isCheckAll = false;
+      $scope.isItemChecked = false;
       $scope.checkAll = self.checkAll;
+      $scope.updateCheckItem = self.updateCheckItem;
 
       $scope.deleteSelected = self.deleteSelected;
       $scope.createNew = self.createNew;
@@ -41,6 +43,8 @@ function goodsListController($scope, $location, $compile, userProfile, goodsList
 
       $scope.filteredGoodsList = $scope.goodsList.slice(begin, end);
       $scope.isCheckAll = false;
+
+      self.updateCheckItem();
     },
 
     detailsClick: function (event, goods) {
@@ -68,6 +72,17 @@ function goodsListController($scope, $location, $compile, userProfile, goodsList
       });
     },
 
+    updateCheckItem: function() {
+      var isItemChecked = false;
+      for (var i = 0; i < $scope.filteredGoodsList.length; i++) {
+        if ($scope.filteredGoodsList[i].checked) {
+          isItemChecked = true;
+          break;
+        }
+      }
+      $scope.isItemChecked = isItemChecked;
+    },
+
     deleteSelected: function () {
       var checkedItems = [];
       angular.forEach($scope.filteredGoodsList, function (goods) {
@@ -75,11 +90,14 @@ function goodsListController($scope, $location, $compile, userProfile, goodsList
           checkedItems.push(goods);
         }
       });
-      angular.forEach(checkedItems, function (item) {
-        var index = $scope.goodsList.indexOf(item);
-        $scope.goodsList.splice(index, 1);
+
+      goodsList.deleteItems(checkedItems, function (errorMessage) {
+        $scope.isOkResult = !errorMessage;
+        $scope.actionMessage = (!errorMessage ? "Items are successfully deleted!" : errorMessage);
+        self.updateList();
       });
-      updateList();
+
+      
     },
 
     createNew: function () {
@@ -168,7 +186,43 @@ function goodsListFactory(userProfile, utils) {
         if (callback)
           callback(errorMessage);
       });
+    },
 
+    deleteItems: function (goodsItems, callback) {
+      var action = "deleteItems";
+      var data = {
+        action: action,
+        goodsItems: goodsItems
+      };
+
+      var session = userProfile.getSession();
+      data.sessionID = (session ? session.id : '');
+
+      utils.httpRequest(data, function success(response) {
+        var errorMessage = "";
+        if (!response.error) {
+          if (response.data) {
+            response.data.forEach(function (item) {
+              var index = -1;
+              for (var i = 0; i < goodsList.length; i++) {
+                if (item.id === goodsList[i].id) {
+                  index = i;
+                  break;
+                }
+              }
+              goodsList.splice(index, 1);
+            });
+          }
+        } else {
+          errorMessage = response.error;
+        }
+        if (callback)
+          callback(errorMessage);
+      }, function error(response, status, headers) {
+        var errorMessage = (response ? "Error: " + response : "Error: status=" + status);
+        if (callback)
+          callback(errorMessage);
+      });
     },
 
     editItem: function (goods, callback) {
@@ -189,7 +243,7 @@ function goodsListFactory(userProfile, utils) {
           errorMessage = response.error;
         }
         if (callback)
-          callback(response.data, errorMessage);
+          callback(errorMessage);
       }, function error(response, status, headers) {
         var errorMessage = (response ? "Error: " + response : "Error: status=" + status);
         if (callback)

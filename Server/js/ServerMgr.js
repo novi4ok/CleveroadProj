@@ -150,6 +150,13 @@ exports.ServerMgr = function () {
                 });
                 break;
               }
+            case "deleteItems":
+              {
+                goodsMgr.deleteItems(dataRequest, objResponse, function () {
+                  self.responseCallbackPOST(response, dataRequest, objResponse);
+                });
+                break;
+              }
             case "editItem":
               {
                 goodsMgr.editItem(dataRequest, objResponse, function () {

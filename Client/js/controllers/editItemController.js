@@ -48,13 +48,10 @@ function editItemController($scope, $routeParams, goodsList) {
           price: goodsItem.price,
           description: goodsItem.description
         };
-        goodsList.editItem(goods, function (resGoods, errorMessage) {
+        goodsList.editItem(goods, function (errorMessage) {
           $scope.isOkResult = !errorMessage;
           $scope.actionMessage = (!errorMessage ? "Item is successfully changed!" : errorMessage);
-          if (!errorMessage && resGoods) {
-            goodsItem.name = resGoods.name;
-            goodsItem.price = resGoods.price;
-            goodsItem.description = resGoods.description;
+          if (!errorMessage) {
           }
         });
       } else {

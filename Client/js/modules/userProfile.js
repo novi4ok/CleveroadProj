@@ -1,4 +1,4 @@
-﻿// User profile module - logging
+﻿// User profile module 
 (function (angular) {
   'use strict';
   var userProfileModule = angular.module('userProfileModule', ['utilsModule'])
